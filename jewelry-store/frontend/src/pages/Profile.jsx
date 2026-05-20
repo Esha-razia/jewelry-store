@@ -59,14 +59,14 @@ const Profile = () => {
                   const image = prod ? prod.image : null;
                   return (
                     <div key={index} className="flex-between" style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-subtle)', alignItems: 'center' }}>
-                      <Link to={`/product/${slug}`} style={{ display: 'flex', gap: '1rem', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+                      <Link to={`/product/${slug}`} state={{ productId: id }} style={{ display: 'flex', gap: '1rem', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
                         {image && <img src={image} alt={name} style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'cover' }} />}
                         <div>
                           <strong style={{ display: 'block', fontSize: '1rem', color: 'var(--text-main)' }}>{name}</strong>
                           {price !== null && <span className="text-gold" style={{ fontSize: '0.9rem' }}>Rs. {price}</span>}
                         </div>
                       </Link>
-                      <Link to={`/product/${slug}`} className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}>
+                      <Link to={`/product/${slug}`} state={{ productId: id }} className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}>
                         View Item &rarr;
                       </Link>
                     </div>
@@ -113,7 +113,7 @@ const Profile = () => {
                   const name = prod ? prod.name : 'Wishlist Item';
                   const slug = prod ? prod.slug : id;
                   return (
-                    <Link key={index} to={`/product/${slug}`} className="text-gold" style={{ fontSize: '0.9rem', display: 'block', marginBottom: '0.2rem' }}>
+                    <Link key={index} to={`/product/${slug}`} state={{ productId: id }} className="text-gold" style={{ fontSize: '0.9rem', display: 'block', marginBottom: '0.2rem' }}>
                       {name} &rarr;
                     </Link>
                   );

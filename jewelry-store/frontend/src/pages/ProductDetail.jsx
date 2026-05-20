@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { WishlistContext } from '../context/WishlistContext';
 
 const ProductDetail = () => {
   const { slug } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,8 @@ const ProductDetail = () => {
       try {
         setLoading(true);
         setError(null);
-        const { data } = await axios.get(`/api/products/${slug}`);
+        const identifier = location.state?.productId || slug;
+        const { data } = await axios.get(`/api/products/${identifier}`);
         setProduct(data);
         setLoading(false);
       } catch (err) {
@@ -30,7 +32,7 @@ const ProductDetail = () => {
     if (slug) {
       fetchProduct();
     }
-  }, [slug]);
+  }, [slug, location.state?.productId]);
 
   const handleAddToCart = () => {
     addToCart(product, 1);

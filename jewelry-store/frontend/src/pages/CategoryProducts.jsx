@@ -75,6 +75,7 @@ const CategoryProducts = () => {
           {products.map((product) => (
             <Link 
               to={`/product/${product.slug || product._id}`} 
+              state={{ productId: product._id }}
               key={product._id} 
               className="glass-panel" 
               style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s ease' }} 

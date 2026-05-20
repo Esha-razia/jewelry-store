@@ -12,7 +12,7 @@ const CATEGORIES = [
 ];
 
 const ProductCard = ({ product }) => (
-  <Link to={`/product/${product.slug || product._id}`} className="home-product-card">
+  <Link to={`/product/${product.slug || product._id}`} state={{ productId: product._id }} className="home-product-card">
     <div className="home-product-media">
       <img src={product.image} alt={product.name} loading="lazy" />
       <span className="home-product-quick">Quick view</span>
@@ -442,7 +442,7 @@ const Home = () => {
                 </div>
                 <div className="home-sale-grid">
                   {bestSellers.map((product) => (
-                    <Link key={product._id} to={`/product/${product.slug || product._id}`}>
+                    <Link key={product._id} to={`/product/${product.slug || product._id}`} state={{ productId: product._id }}>
                       <img src={product.image} alt={product.name} loading="lazy" />
                     </Link>
                   ))}

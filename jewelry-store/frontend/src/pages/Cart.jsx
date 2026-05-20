@@ -29,7 +29,7 @@ const Cart = () => {
                   <img src={item.image} alt={item.name} className="cart-line-img" />
                   <div style={{ minWidth: 0 }}>
                     <h4 style={{ margin: 0, fontFamily: 'var(--font-sans)', fontWeight: '500' }}>
-                      <Link to={`/product/${item.slug || item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.slug || item.product}`} state={{ productId: item.product }}>{item.name}</Link>
                     </h4>
                     <p className="text-gold" style={{ margin: 0 }}>Rs. {item.price}</p>
                   </div>
