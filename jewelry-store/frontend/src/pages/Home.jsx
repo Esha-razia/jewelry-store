@@ -30,6 +30,8 @@ const Home = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
+  const [nlStatus, setNlStatus] = useState('');
+  const [nlLoading, setNlLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,10 +63,18 @@ const Home = () => {
     return [...products].sort((a, b) => b.price - a.price).slice(0, 4);
   }, [products]);
 
-  const handleNewsletter = (e) => {
+  const handleNewsletter = async (e) => {
     e.preventDefault();
-    if (email.trim()) {
+    setNlStatus('');
+    setNlLoading(true);
+    try {
+      const { data } = await axios.post('/api/newsletter/subscribe', { email: email.trim() });
+      setNlStatus(data.message || 'You are subscribed. Thank you!');
       setEmail('');
+    } catch (err) {
+      setNlStatus(err.response?.data?.message || err.message || 'Could not subscribe right now.');
+    } finally {
+      setNlLoading(false);
     }
   };
 
@@ -530,10 +540,13 @@ const Home = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit" className="btn btn-primary">
-              Subscribe
+            <button type="submit" className="btn btn-primary" disabled={nlLoading}>
+              {nlLoading ? 'Sending…' : 'Subscribe'}
             </button>
           </form>
+          {nlStatus ? (
+            <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--accent-gold-hover)' }}>{nlStatus}</p>
+          ) : null}
         </section>
       </div>
     </div>

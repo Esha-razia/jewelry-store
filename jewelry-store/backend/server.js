@@ -8,6 +8,8 @@ const productRoutes = require('./routes/productRoutes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
 const chatRoutes = require('./routes/chatRoutes.js');
 const analyticsRoutes = require('./routes/analyticsRoutes.js');
+const newsletterRoutes = require('./routes/newsletterRoutes.js');
+const contactRoutes = require('./routes/contactRoutes.js');
 
 // Load env variables
 dotenv.config();
@@ -29,6 +31,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

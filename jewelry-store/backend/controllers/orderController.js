@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const asyncHandler = require('express-async-handler');
 const Order = require('../models/Order.js');
 
@@ -66,6 +67,56 @@ const getOrders = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
+// @desc    Lookup order status with order id + email (same as account checkout email)
+// @route   POST /api/orders/track
+// @access  Public
+const trackOrderPublic = asyncHandler(async (req, res) => {
+  const { orderId, email } = req.body || {};
+  if (!orderId || typeof orderId !== 'string' || !mongoose.Types.ObjectId.isValid(orderId.trim())) {
+    res.status(400);
+    throw new Error('Enter a valid order ID');
+  }
+  if (!email || typeof email !== 'string' || email.trim().length < 5) {
+    res.status(400);
+    throw new Error('Enter the email used on checkout');
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+  const order = await Order.findById(orderId.trim()).populate('user', 'email name');
+
+  if (!order || !order.user || !order.user.email) {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+
+  const accountEmail = (order.user.email || '').trim().toLowerCase();
+  if (accountEmail !== normalizedEmail) {
+    res.status(404);
+    throw new Error('Order not found for this email');
+  }
+
+  const safeSummary = {
+    _id: order._id,
+    createdAt: order.createdAt,
+    updatedAt: order.updatedAt,
+    totalPrice: order.totalPrice,
+    isPaid: order.isPaid,
+    paidAt: order.paidAt,
+    isDelivered: order.isDelivered,
+    deliveredAt: order.deliveredAt,
+    shippingAddress: order.shippingAddress,
+    paymentMethod: order.paymentMethod,
+    orderItems: (order.orderItems || []).map((it) => ({
+      name: it.name,
+      qty: it.qty,
+      price: it.price,
+      image: it.image,
+    })),
+  };
+
+  res.json(safeSummary);
+});
+
 // @desc    Update order to paid (manual override)
 // @route   PUT /api/orders/:id/pay
 // @access  Private/Admin
@@ -114,7 +165,8 @@ module.exports = {
   addOrderItems, 
   getOrderById, 
   getMyOrders, 
-  getOrders, 
+  getOrders,
+  trackOrderPublic,
   updateOrderToDelivered, 
   updateOrderToPaid 
 };

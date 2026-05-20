@@ -412,7 +412,6 @@ const Checkout = () => {
             grid-template-columns: 1fr;
           }
           .checkout-sidebar {
-            order: -1;
             position: static;
           }
           .checkout-header {

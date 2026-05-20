@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
-import { ShoppingBag, Heart, User as UserIcon, LogOut, Menu, X, Home, Sparkles, TrendingUp, LayoutGrid, Shield, Gem, ChevronDown, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Heart, User as UserIcon, LogOut, Menu, X, Home, Sparkles, TrendingUp, LayoutGrid, Shield, Gem, ChevronDown, ChevronRight, PackageSearch, Mail } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -17,12 +17,32 @@ const Navbar = () => {
     setCategoriesOpen(false);
   };
 
+  useEffect(() => {
+    if (!menuOpen) {
+      document.body.style.overflow = '';
+      return;
+    }
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setCategoriesOpen(false);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
+
   return (
     <>
-      <nav className="glass-panel" style={{ margin: '1rem', padding: '1rem 2rem', borderRadius: '50px', position: 'relative', zIndex: 1000 }}>
-        <div className="flex-between">
+      <nav className="glass-panel nav-bar-shell">
+        <div className="flex-between nav-bar-row">
           {/* Left Side: Hamburger + Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             {/* Hamburger Icon */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -47,65 +67,46 @@ const Navbar = () => {
 
 
 
-          {/* Right Icons */}
-          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <Link to="/profile"><Heart size={22} className="text-muted hover:text-gold" /></Link>
-            
-            <Link to="/cart" style={{ position: 'relative' }}>
+          {/* Right Icons (Sign in only in hamburger menu) */}
+          <div className="nav-bar-actions">
+            <Link to="/profile" aria-label="Wishlist" className="nav-icon-link">
+              <Heart size={22} className="text-muted hover:text-gold" />
+            </Link>
+            <Link to="/cart" className="nav-icon-link nav-cart-link" aria-label="Shopping bag">
               <ShoppingBag size={22} />
               {cartCount > 0 && (
-                <span style={{
-                  position: 'absolute', top: '-8px', right: '-8px', 
-                  backgroundColor: 'var(--accent-gold)', color: '#000',
-                  borderRadius: '50%', padding: '0 6px', fontSize: '10px', fontWeight: 'bold'
-                }}>
-                  {cartCount}
+                <span className="nav-cart-badge">
+                  {cartCount > 99 ? '99+' : cartCount}
                 </span>
               )}
             </Link>
-
-            {user ? (
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <Link to={user.isAdmin ? '/admin' : '/profile'}>
+            {user && (
+              <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center' }}>
+                <Link to={user.isAdmin ? '/admin' : '/profile'} aria-label="Account" className="nav-icon-link">
                   <UserIcon size={22} className="text-gold" />
                 </Link>
-                <button onClick={logout} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-main)' }}>
+                <button type="button" onClick={logout} aria-label="Sign out" className="nav-icon-btn">
                   <LogOut size={22} />
                 </button>
               </div>
-            ) : (
-              <Link to="/auth" className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}>SIGN IN</Link>
             )}
           </div>
         </div>
       </nav>
 
       {/* Slide-out Hamburger Menu */}
-      {menuOpen && (
-        <div
-          className="hamburger-overlay"
-          onClick={closeMenu}
-          style={{
-            position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-            backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
-            zIndex: 1001, animation: 'fadeIn 0.2s ease-out',
-          }}
-        />
-      )}
+      <div
+        className={`hamburger-overlay${menuOpen ? ' is-open' : ''}`}
+        onClick={closeMenu}
+        role="presentation"
+        aria-hidden={!menuOpen}
+      />
 
       <div
-        className="hamburger-menu"
-        style={{
-          position: 'fixed', top: 0, left: menuOpen ? '0' : '-320px',
-          width: '300px', height: '100vh', zIndex: 1002,
-          background: 'linear-gradient(180deg, #111111 0%, #0a0a0a 100%)',
-          borderRight: '1px solid rgba(212,175,55,0.15)',
-          boxShadow: menuOpen ? '4px 0 30px rgba(0,0,0,0.5)' : 'none',
-          transition: 'left 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-          display: 'flex', flexDirection: 'column',
-          padding: '0',
-          overflow: 'hidden',
-        }}
+        className={`hamburger-menu${menuOpen ? ' is-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
       >
         {/* Menu Header */}
         <div style={{
@@ -138,6 +139,11 @@ const Navbar = () => {
           <Link to="/" onClick={closeMenu} style={menuItemStyle}>
             <Home size={20} style={{ color: 'var(--accent-gold)' }} />
             <span>Home</span>
+          </Link>
+
+          <Link to="/cart" onClick={closeMenu} style={menuItemStyle}>
+            <ShoppingBag size={20} style={{ color: 'var(--accent-gold)' }} />
+            <span>Shopping bag {cartCount > 0 ? `(${cartCount})` : ''}</span>
           </Link>
 
           {/* Collapsible Shop Categories */}
@@ -177,6 +183,21 @@ const Navbar = () => {
           {/* Separator */}
           <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', margin: '1.5rem 0' }} />
 
+          <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-muted)', marginBottom: '1rem', fontWeight: '600' }}>Help</p>
+
+          <Link to="/track-order" onClick={closeMenu} style={menuItemStyle}>
+            <PackageSearch size={20} style={{ color: 'var(--accent-gold)' }} />
+            <span>Track order</span>
+          </Link>
+
+          <Link to="/contact" onClick={closeMenu} style={menuItemStyle}>
+            <Mail size={20} style={{ color: 'var(--accent-gold)' }} />
+            <span>Contact us</span>
+          </Link>
+
+          {/* Separator */}
+          <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', margin: '1.5rem 0' }} />
+
           <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-muted)', marginBottom: '1rem', fontWeight: '600' }}>Account</p>
 
           {user ? (
@@ -184,11 +205,6 @@ const Navbar = () => {
               <Link to="/profile" onClick={closeMenu} style={menuItemStyle}>
                 <UserIcon size={20} style={{ color: 'var(--accent-gold)' }} />
                 <span>My Profile</span>
-              </Link>
-
-              <Link to="/cart" onClick={closeMenu} style={menuItemStyle}>
-                <ShoppingBag size={20} style={{ color: 'var(--accent-gold)' }} />
-                <span>Shopping Bag {cartCount > 0 ? `(${cartCount})` : ''}</span>
               </Link>
 
               <Link to="/profile" onClick={closeMenu} style={menuItemStyle}>
