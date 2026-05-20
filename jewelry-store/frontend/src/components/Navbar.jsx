@@ -2,16 +2,20 @@ import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
-import { ShoppingBag, Heart, User as UserIcon, LogOut, Menu, X, Home, Sparkles, TrendingUp, LayoutGrid, Shield, Gem } from 'lucide-react';
+import { ShoppingBag, Heart, User as UserIcon, LogOut, Menu, X, Home, Sparkles, TrendingUp, LayoutGrid, Shield, Gem, ChevronDown, ChevronRight } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setCategoriesOpen(false);
+  };
 
   return (
     <>
@@ -36,8 +40,8 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link to="/" style={{ display: 'flex', alignItems: 'center' }} onClick={closeMenu}>
-              <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>AURORA</span>
-              <span style={{ marginLeft: '5px', color: 'var(--accent-gold)' }}>JEWELS</span>
+              <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>JEWEL</span>
+              <span style={{ marginLeft: '2px', color: 'var(--accent-gold)' }}>SAFA</span>
             </Link>
           </div>
 
@@ -111,8 +115,8 @@ const Navbar = () => {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Gem size={22} style={{ color: 'var(--accent-gold)' }} />
-            <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: '600' }}>AURORA</span>
-            <span style={{ color: 'var(--accent-gold)', fontSize: '1.2rem' }}>JEWELS</span>
+            <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.2rem', fontWeight: '600' }}>JEWEL</span>
+            <span style={{ color: 'var(--accent-gold)', fontSize: '1.2rem' }}>SAFA</span>
           </div>
           <button
             onClick={closeMenu}
@@ -128,7 +132,7 @@ const Navbar = () => {
         </div>
 
         {/* Menu Section: Main */}
-        <div style={{ padding: '1.5rem', flex: 1 }}>
+        <div style={{ padding: '1.5rem', flex: 1, overflowY: 'auto' }}>
           <p style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--text-muted)', marginBottom: '1rem', fontWeight: '600' }}>Navigate</p>
 
           <Link to="/" onClick={closeMenu} style={menuItemStyle}>
@@ -136,10 +140,29 @@ const Navbar = () => {
             <span>Home</span>
           </Link>
 
-          <a href="/#collection" onClick={closeMenu} style={menuItemStyle}>
-            <LayoutGrid size={20} style={{ color: 'var(--accent-gold)' }} />
-            <span>Collections</span>
-          </a>
+          {/* Collapsible Shop Categories */}
+          <div>
+            <div 
+              onClick={() => setCategoriesOpen(!categoriesOpen)} 
+              style={{ ...menuItemStyle, justifyContent: 'space-between', cursor: 'pointer' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                <LayoutGrid size={20} style={{ color: 'var(--accent-gold)' }} />
+                <span>Shop Categories</span>
+              </div>
+              {categoriesOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+            </div>
+
+            {categoriesOpen && (
+              <div style={{ paddingLeft: '2.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '0.5rem', animation: 'fadeIn 0.2s ease-out' }}>
+                <Link to="/category/rings" onClick={closeMenu} style={categoryLinkStyle}>Rings</Link>
+                <Link to="/category/necklaces" onClick={closeMenu} style={categoryLinkStyle}>Necklaces</Link>
+                <Link to="/category/bracelets" onClick={closeMenu} style={categoryLinkStyle}>Bracelets</Link>
+                <Link to="/category/earrings" onClick={closeMenu} style={categoryLinkStyle}>Earrings</Link>
+                <Link to="/category/bangles" onClick={closeMenu} style={categoryLinkStyle}>Bangles</Link>
+              </div>
+            )}
+          </div>
 
           <a href="/#collection" onClick={closeMenu} style={menuItemStyle}>
             <Sparkles size={20} style={{ color: 'var(--accent-gold)' }} />
@@ -223,6 +246,18 @@ const menuItemStyle = {
   fontSize: '0.95rem', fontWeight: '400',
   transition: 'all 0.2s ease', marginBottom: '0.3rem',
   cursor: 'pointer',
+};
+
+const categoryLinkStyle = {
+  display: 'block',
+  textDecoration: 'none',
+  color: 'var(--text-muted)',
+  fontSize: '0.85rem',
+  padding: '0.5rem 1rem',
+  borderRadius: '8px',
+  transition: 'all 0.2s ease',
+  cursor: 'pointer',
+  marginBottom: '0.2rem',
 };
 
 export default Navbar;

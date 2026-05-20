@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
+import CategoryProducts from './pages/CategoryProducts';
 import Auth from './pages/Auth';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/category/:name" element={<CategoryProducts />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />

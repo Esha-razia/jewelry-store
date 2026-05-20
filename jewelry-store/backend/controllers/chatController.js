@@ -84,7 +84,7 @@ const handleChatMessage = asyncHandler(async (req, res) => {
 
     default:
       return res.json({ 
-        text: "I'm your Aurora Jewels assistant! I'm still learning, but I can help you search for jewelry, check your order status, or answer shipping/return FAQs.", 
+        text: "I'm your JEWELSAFA assistant! I'm still learning, but I can help you search for jewelry, check your order status, or answer shipping/return FAQs.", 
         type: 'text' 
       });
   }

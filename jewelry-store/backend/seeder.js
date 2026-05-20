@@ -34,7 +34,7 @@ const importData = async () => {
         material: 'White Gold & Diamond',
         user: adminUser,
         seoTags: ['ring', 'diamond', 'engagement'],
-        metaTitle: 'Diamond Engagement Ring | Aurora Jewels',
+        metaTitle: 'Diamond Engagement Ring | JEWELSAFA',
         metaDescription: 'Buy a stunning diamond engagement ring.'
       },
       {
@@ -48,7 +48,7 @@ const importData = async () => {
         material: '24k Solid Gold',
         user: adminUser,
         seoTags: ['necklace', 'gold', 'chain'],
-        metaTitle: '24k Gold Chain | Aurora Jewels',
+        metaTitle: '24k Gold Chain | JEWELSAFA',
         metaDescription: 'Solid 24k gold chain for everyday elegance.'
       },
       {
@@ -62,7 +62,7 @@ const importData = async () => {
         material: 'Sapphire & Diamonds',
         user: adminUser,
         seoTags: ['pendant', 'sapphire', 'blue'],
-        metaTitle: 'Sapphire Pendant | Aurora Jewels',
+        metaTitle: 'Sapphire Pendant | JEWELSAFA',
         metaDescription: 'Beautiful sapphire pendant surrounded by diamonds.'
       },
       {
@@ -76,7 +76,7 @@ const importData = async () => {
         material: 'Platinum & Diamond',
         user: adminUser,
         seoTags: ['bracelet', 'platinum', 'tennis'],
-        metaTitle: 'Platinum Tennis Bracelet | Aurora Jewels',
+        metaTitle: 'Platinum Tennis Bracelet | JEWELSAFA',
         metaDescription: 'Modern platinum tennis bracelet.'
       }
     ];

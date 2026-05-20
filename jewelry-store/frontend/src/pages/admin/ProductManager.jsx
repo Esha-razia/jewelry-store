@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 // Lightweight client-side SEO preview generator (for NEW products before save)
 const localGenerateSEO = ({ name, category, material, brand, description }) => {
   const n = (name || '').trim();
-  const b = (brand || 'Aurora Jewels').trim();
+  const b = (brand || 'JEWELSAFA').trim();
   const m = (material || '').trim();
   const c = (category || '').trim();
   const d = (description || '').trim();
@@ -91,7 +91,7 @@ const ProductManager = () => {
       setName('New Jewelry Piece');
       setPrice(99);
       setImage('/images/sample.jpg');
-      setBrand('Aurora Jewels');
+      setBrand('JEWELSAFA');
       setCategory('Rings');
       setMaterial('18k Gold');
       setCountInStock(5);
@@ -161,20 +161,16 @@ const ProductManager = () => {
     }
   };
 
-  // Opens the inline confirm panel
-  // Opens the inline confirm panel (sets product id for confirmation)
   const deleteHandler = (id) => {
     setConfirmDeleteId(id);
   };
 
-  // Actually performs the delete after confirmation
   const confirmDelete = async () => {
     if (!user || !user.token) {
-      setDeleteError('Not logged in. Please log out and log back in as Admin.');
+      window.alert('Not logged in. Please log out and log back in as Admin.');
       return;
     }
     setDeleteLoading(true);
-    setDeleteError('');
     try {
       const config = { headers: { Authorization: 'Bearer ' + user.token } };
       await axios.delete('/api/products/' + confirmDeleteId, config);
@@ -182,13 +178,12 @@ const ProductManager = () => {
       fetchProducts();
     } catch (err) {
       const status = err.response?.status;
-      const msg    = err.response?.data?.message || err.message || 'Delete failed';
+      const msg = err.response?.data?.message || err.message || 'Delete failed';
       if (status === 401) {
-        setDeleteError('Session expired. Please log out and log back in, then try again.');
-        // Clear stale token so user is prompted to re-login
+        window.alert('Session expired. Please log out and log back in, then try again.');
         if (logout) logout();
       } else {
-        setDeleteError(msg);
+        window.alert('Delete error: ' + msg);
       }
       console.error('Delete error:', status, msg);
     } finally {
@@ -232,24 +227,13 @@ const ProductManager = () => {
                       : <span style={{ color: '#ff6b6b', fontSize: '0.75rem' }}>✗ Missing</span>}
                   </td>
                   <td>
-                        <button onClick={() => deleteHandler(product._id)} className="btn" style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem', background: deleteLoading ? '#a5a5a5' : '#ff6b6b', color: '#fff' }} disabled={deleteLoading}>{deleteLoading ? 'Deleting...' : 'Del'}</button>
+                    <button onClick={() => openModal(product)} className="btn btn-primary" style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem', marginRight: '0.5rem' }}>Edit</button>
+                    <button onClick={() => deleteHandler(product._id)} className="btn" style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem', background: deleteLoading ? '#a5a5a5' : '#ff6b6b', color: '#fff' }} disabled={deleteLoading}>{deleteLoading ? 'Deleting...' : 'Del'}</button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        {confirmDeleteId && (
-          <div className="toast-confirm fade-in" style={{
-            position: 'fixed', top: '2rem', left: '50%', transform: 'translateX(-50%)',
-            background: 'var(--panel-bg)', color: '#fff', padding: '1rem 1.5rem', borderRadius: '8px',
-            border: '1px solid rgba(212,175,55,0.3)', boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-            display: 'flex', alignItems: 'center', gap: '1rem', zIndex: 9999
-          }}>
-            <span style={{ fontWeight: '500' }}>Are you sure you want to delete this product?</span>
-            <button onClick={confirmDelete} className="btn" style={{ background: '#ff6b6b', color: '#fff', padding: '0.4rem 1rem', borderRadius: '4px', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}>Ok</button>
-            <button onClick={() => setConfirmDeleteId(null)} className="btn" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '0.4rem 1rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.2)', cursor: 'pointer' }}>Cancel</button>
-          </div>
-        )}
         </div>
       )}
 
@@ -365,7 +349,7 @@ const ProductManager = () => {
                   <input
                     value={metaTitle}
                     onChange={e => setMetaTitle(e.target.value)}
-                    placeholder="e.g. 24k Gold Chain Necklace | Aurora Jewels"
+                    placeholder="e.g. 24k Gold Chain Necklace | JEWELSAFA"
                     maxLength={80}
                   />
                   {titleLen > 60 && (
@@ -426,6 +410,24 @@ const ProductManager = () => {
                 {editingProduct ? 'Update Product' : 'Save Product'}
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {confirmDeleteId && (
+        <div className="modal-overlay" onClick={() => setConfirmDeleteId(null)} style={{ zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="glass-panel modal-content fade-in" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px', width: '90%', textAlign: 'center', padding: '2rem', position: 'relative' }}>
+            <h3 style={{ color: '#ff6b6b', marginBottom: '1rem', fontSize: '1.5rem' }}>Confirm Delete</h3>
+            <p style={{ marginBottom: '2rem', fontSize: '1.1rem', color: '#e0e0e0' }}>You really want to delete this product?</p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+              <button onClick={confirmDelete} className="btn" style={{ background: '#ff6b6b', color: '#fff', padding: '0.6rem 1.5rem', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: 'bold', minWidth: '100px' }} disabled={deleteLoading}>
+                {deleteLoading ? 'Deleting...' : 'Ok'}
+              </button>
+              <button onClick={() => setConfirmDeleteId(null)} className="btn" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', padding: '0.6rem 1.5rem', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.2)', cursor: 'pointer', minWidth: '100px' }} disabled={deleteLoading}>
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}

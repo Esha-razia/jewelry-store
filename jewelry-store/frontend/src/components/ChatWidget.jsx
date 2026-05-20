@@ -53,7 +53,7 @@ const ChatWidget = () => {
         }}>
           {/* Header */}
           <div style={{ padding: '1rem', borderBottom: '1px solid var(--border-subtle)', background: 'rgba(212,175,55,0.1)' }}>
-            <h3 style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: '1.2rem' }}>Aurora AI</h3>
+            <h3 style={{ margin: 0, fontFamily: 'var(--font-sans)', fontSize: '1.2rem' }}>JEWELSAFA AI</h3>
             <span className="text-muted" style={{ fontSize: '0.8rem' }}>Jewelry Assistant</span>
           </div>
 
@@ -95,7 +95,7 @@ const ChatWidget = () => {
               </div>
             ))}
             {isTyping && (
-              <div style={{ alignSelf: 'flex-start', color: 'var(--text-muted)', fontSize: '0.8rem', fontStyle: 'italic' }}>Aurora is thinking...</div>
+              <div style={{ alignSelf: 'flex-start', color: 'var(--text-muted)', fontSize: '0.8rem', fontStyle: 'italic' }}>JEWELSAFA is thinking...</div>
             )}
             <div ref={bottomRef} />
           </div>

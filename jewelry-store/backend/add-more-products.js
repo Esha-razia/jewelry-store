@@ -28,7 +28,7 @@ const addMoreProducts = async () => {
         material: '18k Gold & Emerald',
         user: adminUser._id,
         seoTags: ['ring', 'emerald', 'gold'],
-        metaTitle: 'Emerald Ring | Aurora Jewels',
+        metaTitle: 'Emerald Ring | JEWELSAFA',
         metaDescription: 'Stunning emerald cut ring.'
       },
       {
@@ -42,7 +42,7 @@ const addMoreProducts = async () => {
         material: 'Freshwater Pearls & Silver',
         user: adminUser._id,
         seoTags: ['necklace', 'pearl'],
-        metaTitle: 'Pearl Necklace | Aurora Jewels',
+        metaTitle: 'Pearl Necklace | JEWELSAFA',
         metaDescription: 'Classic pearl necklace for elegance.'
       },
       {
@@ -56,7 +56,7 @@ const addMoreProducts = async () => {
         material: 'Rose Gold & Ruby',
         user: adminUser._id,
         seoTags: ['pendant', 'ruby', 'rose gold'],
-        metaTitle: 'Ruby Pendant | Aurora Jewels',
+        metaTitle: 'Ruby Pendant | JEWELSAFA',
         metaDescription: 'Rose gold ruby pendant.'
       },
       {
@@ -70,7 +70,7 @@ const addMoreProducts = async () => {
         material: 'Platinum & Opal',
         user: adminUser._id,
         seoTags: ['bracelet', 'opal', 'diamond'],
-        metaTitle: 'Opal Bracelet | Aurora Jewels',
+        metaTitle: 'Opal Bracelet | JEWELSAFA',
         metaDescription: 'Magical opal bracelet.'
       },
       {
@@ -84,7 +84,7 @@ const addMoreProducts = async () => {
         material: 'White Gold & Diamond',
         user: adminUser._id,
         seoTags: ['choker', 'diamond', 'vintage'],
-        metaTitle: 'Vintage Diamond Choker | Aurora Jewels',
+        metaTitle: 'Vintage Diamond Choker | JEWELSAFA',
         metaDescription: 'Authentic vintage choker.'
       },
       {
@@ -98,7 +98,7 @@ const addMoreProducts = async () => {
         material: 'Silver & Diamond',
         user: adminUser._id,
         seoTags: ['ring', 'solitaire', 'promise'],
-        metaTitle: 'Solitaire Ring | Aurora Jewels',
+        metaTitle: 'Solitaire Ring | JEWELSAFA',
         metaDescription: 'Beautiful promise ring.'
       }
     ];

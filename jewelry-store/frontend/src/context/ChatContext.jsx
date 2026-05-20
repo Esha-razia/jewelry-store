@@ -7,7 +7,7 @@ export const ChatContext = createContext();
 export const ChatProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { text: "Hi! I'm Aurora, your AI jewelry assistant. Are you looking for something specific, or checking an order?", sender: 'ai' }
+    { text: "Hi! I'm JEWELSAFA, your AI jewelry assistant. Are you looking for something specific, or checking an order?", sender: 'ai' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const { user } = useContext(AuthContext);

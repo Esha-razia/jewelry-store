@@ -609,7 +609,7 @@ const generateSEOContent = (product) => {
   const name        = (product.name        || '').trim();
   const category    = (product.category    || '').trim();
   const material    = (product.material    || '').trim();
-  const brand       = (product.brand       || 'Aurora Jewels').trim();
+  const brand       = (product.brand       || 'JEWELSAFA').trim();
   const description = (product.description || '').trim();
 
   // ── Meta Title (max 60 chars) ──────────────────────────────
