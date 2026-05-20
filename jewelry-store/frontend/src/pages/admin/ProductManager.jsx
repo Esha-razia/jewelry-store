@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { createPortal } from 'react-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -237,7 +238,7 @@ const ProductManager = () => {
         </div>
       )}
 
-      {showModal && (
+      {showModal && createPortal(
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="glass-panel modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '700px', maxHeight: '90vh', overflowY: 'auto' }}>
             <span className="close-btn" onClick={() => setShowModal(false)}>&times;</span>
@@ -411,11 +412,12 @@ const ProductManager = () => {
               </button>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Delete Confirmation Modal */}
-      {confirmDeleteId && (
+      {confirmDeleteId && createPortal(
         <div className="modal-overlay" onClick={() => setConfirmDeleteId(null)} style={{ zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div className="glass-panel modal-content fade-in" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px', width: '90%', textAlign: 'center', padding: '2rem', position: 'relative' }}>
             <h3 style={{ color: '#ff6b6b', marginBottom: '1rem', fontSize: '1.5rem' }}>Confirm Delete</h3>
@@ -429,7 +431,8 @@ const ProductManager = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
