@@ -219,7 +219,7 @@ const ProductManager = () => {
                 <tr key={product._id} style={{ fontSize: '0.9rem' }}>
                   <td className="text-muted">{product._id.substring(18)}</td>
                   <td>{product.name}</td>
-                  <td>${product.price}</td>
+                  <td>Rs. {product.price}</td>
                   <td>{product.countInStock}</td>
                   <td>
                     {product.metaTitle
@@ -259,7 +259,7 @@ const ProductManager = () => {
                   <input value={name} onChange={e => setName(e.target.value)} required />
                 </div>
                 <div className="form-group">
-                  <label>Price ($)</label>
+                  <label>Price (Rs.)</label>
                   <input type="number" value={price} onChange={e => setPrice(e.target.value)} required />
                 </div>
               </div>

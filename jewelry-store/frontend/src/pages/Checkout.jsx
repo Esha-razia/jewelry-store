@@ -657,7 +657,7 @@ const Checkout = () => {
                 </div>
               </div>
               <span className="checkout-option-price">
-                {standardShipping === 0 ? 'Free' : `$${standardShipping.toFixed(2)}`}
+                {standardShipping === 0 ? 'Free' : `Rs. ${standardShipping.toFixed(2)}`}
               </span>
             </label>
             <label
@@ -678,7 +678,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <span className="checkout-option-price">${expressShipping.toFixed(2)}</span>
+              <span className="checkout-option-price">Rs. {expressShipping.toFixed(2)}</span>
             </label>
           </section>
 
@@ -766,7 +766,7 @@ const Checkout = () => {
                     <p>{item.material || 'Fine jewelry'}</p>
                   </div>
                   <span style={{ fontWeight: 500, fontSize: '0.9rem' }}>
-                    ${(item.qty * item.price).toFixed(2)}
+                    Rs. {(item.qty * item.price).toFixed(2)}
                   </span>
                 </div>
               ))}
@@ -775,21 +775,21 @@ const Checkout = () => {
             <div>
               <div className="checkout-summary-line">
                 <span>Subtotal · {itemCount} {itemCount === 1 ? 'item' : 'items'}</span>
-                <span>${itemsPrice.toFixed(2)}</span>
+                <span>Rs. {itemsPrice.toFixed(2)}</span>
               </div>
               <div className="checkout-summary-line">
                 <span>Shipping</span>
                 <span>
-                  {shippingPrice === 0 ? 'Free' : `$${shippingPrice.toFixed(2)}`}
+                  {shippingPrice === 0 ? 'Free' : `Rs. ${shippingPrice.toFixed(2)}`}
                 </span>
               </div>
               <div className="checkout-summary-line">
                 <span>Estimated tax</span>
-                <span>${taxPrice.toFixed(2)}</span>
+                <span>Rs. {taxPrice.toFixed(2)}</span>
               </div>
               <div className="checkout-summary-line total">
                 <span>Total</span>
-                <span>USD ${totalPrice}</span>
+                <span>PKR {totalPrice}</span>
               </div>
             </div>
 

@@ -2,13 +2,17 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { WishlistContext } from '../context/WishlistContext';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const { wishlist } = useContext(WishlistContext);
   const [orders, setOrders] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+
+  const isWishlistView = searchParams.get('view') === 'wishlist';
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -21,12 +25,60 @@ const Profile = () => {
         console.error(error);
       }
     };
+    const fetchProducts = async () => {
+      try {
+        const { data } = await axios.get('/api/products');
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     if (user) {
       fetchOrders();
+      fetchProducts();
     }
   }, [user]);
 
   if (!user) return <h2 style={{ textAlign: 'center', marginTop: '4rem' }}>Please log in.</h2>;
+
+  if (isWishlistView) {
+    return (
+      <div className="fade-in" style={{ marginTop: '2rem' }}>
+        <h1 style={{ marginBottom: '3rem', textAlign: 'center' }}>My Wishlist</h1>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <div className="glass-panel" style={{ padding: '2rem' }}>
+            {wishlist.length === 0 ? (
+              <p className="text-muted" style={{ textAlign: 'center', padding: '2rem 0' }}>Wishlist is empty.</p>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {wishlist.map((id, index) => {
+                  const prod = products.find(p => p._id === id);
+                  const name = prod ? prod.name : 'Wishlist Item';
+                  const slug = prod ? prod.slug : id;
+                  const price = prod ? prod.price : null;
+                  const image = prod ? prod.image : null;
+                  return (
+                    <div key={index} className="flex-between" style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border-subtle)', alignItems: 'center' }}>
+                      <Link to={`/product/${slug}`} style={{ display: 'flex', gap: '1rem', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+                        {image && <img src={image} alt={name} style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'cover' }} />}
+                        <div>
+                          <strong style={{ display: 'block', fontSize: '1rem', color: 'var(--text-main)' }}>{name}</strong>
+                          {price !== null && <span className="text-gold" style={{ fontSize: '0.9rem' }}>Rs. {price}</span>}
+                        </div>
+                      </Link>
+                      <Link to={`/product/${slug}`} className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }}>
+                        View Item &rarr;
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fade-in" style={{ marginTop: '2rem' }}>
@@ -56,11 +108,16 @@ const Profile = () => {
               <p className="text-muted">Wishlist is empty.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {wishlist.map((id, index) => (
-                  <Link key={index} to={`/product/${id}`} className="text-gold" style={{ fontSize: '0.9rem' }}>
-                    View Wishlist Item &rarr;
-                  </Link>
-                ))}
+                {wishlist.map((id, index) => {
+                  const prod = products.find(p => p._id === id);
+                  const name = prod ? prod.name : 'Wishlist Item';
+                  const slug = prod ? prod.slug : id;
+                  return (
+                    <Link key={index} to={`/product/${slug}`} className="text-gold" style={{ fontSize: '0.9rem', display: 'block', marginBottom: '0.2rem' }}>
+                      {name} &rarr;
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -96,7 +153,7 @@ const Profile = () => {
                   </div>
 
                   <div className="flex-between text-muted" style={{ fontSize: '0.9rem', marginTop: '1rem' }}>
-                    <span>Total: ${order.totalPrice}</span>
+                    <span>Total: Rs. {order.totalPrice}</span>
                     <span>Placed: {new Date(order.createdAt).toLocaleDateString()}</span>
                   </div>
                 </div>

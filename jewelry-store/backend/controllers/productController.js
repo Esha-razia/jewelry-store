@@ -14,10 +14,39 @@ const getProducts = asyncHandler(async (req, res) => {
 // @route   GET /api/products/:id
 // @access  Public
 const getProductById = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const param = req.params.id;
+  console.log(`[getProductById] Querying for product with param: "${param}"`);
+
+  let product = null;
+  try {
+    console.log(`[getProductById] Attempting Product.findOne({ slug: "${param}" })`);
+    product = await Product.findOne({ slug: param });
+    console.log(`[getProductById] findOne by slug result:`, product ? product.name : 'null');
+  } catch (err) {
+    console.error(`[getProductById] Product.findOne by slug threw error:`, err);
+    throw err;
+  }
+
+  if (!product) {
+    const mongoose = require('mongoose');
+    if (mongoose.Types.ObjectId.isValid(param)) {
+      try {
+        console.log(`[getProductById] Attempting Product.findById("${param}")`);
+        product = await Product.findById(param);
+        console.log(`[getProductById] findById result:`, product ? product.name : 'null');
+      } catch (err) {
+        console.error(`[getProductById] Product.findById threw error:`, err);
+        throw err;
+      }
+    } else {
+      console.log(`[getProductById] Param is not a valid ObjectId, skipping findById.`);
+    }
+  }
+
   if (product) {
     res.json(product);
   } else {
+    console.log(`[getProductById] Product not found for param: "${param}"`);
     res.status(404);
     throw new Error('Product not found');
   }
@@ -71,9 +100,9 @@ const createProduct = asyncHandler(async (req, res) => {
     console.log('SUCCESS: Product created');
     res.status(201).json(createdProduct);
   } catch (error) {
-    console.error('ERROR during product creation:', error.message);
+    console.error('ERROR during product creation:', error);
     res.status(400);
-    throw new Error(error.message);
+    throw error;
   }
 });
 
@@ -122,9 +151,9 @@ const updateProduct = asyncHandler(async (req, res) => {
       console.log('SUCCESS: Product updated');
       res.json(updatedProduct);
     } catch (error) {
-       console.error('ERROR during product update:', error.message);
+       console.error('ERROR during product update:', error);
        res.status(400);
-       throw new Error(error.message);
+       throw error;
     }
   } else {
     res.status(404);
@@ -136,26 +165,27 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @route   POST /api/products/:id/generate-seo
 // @access  Private/Admin
 const generateProductSEO = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
-
-  if (!product) {
-    res.status(404);
-    throw new Error('Product not found');
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      res.status(404);
+      throw new Error('Product not found');
+    }
+    const generated = await generateSEOContent(product);
+    product.metaTitle = generated.metaTitle;
+    product.metaDescription = generated.metaDescription;
+    product.seoTags = generated.seoTags;
+    await product.save();
+    // Respond with generated SEO data
+    res.json({
+      metaTitle: generated.metaTitle,
+      metaDescription: generated.metaDescription,
+      seoTags: generated.seoTags,
+    });
+  } catch (err) {
+    console.error('SEO generation error:', err);
+    res.status(500).json({ message: 'SEO generation failed' });
   }
-
-  const generated = generateSEOContent(product);
-
-  product.metaTitle       = generated.metaTitle;
-  product.metaDescription = generated.metaDescription;
-  product.seoTags         = generated.seoTags;
-
-  await product.save();
-
-  res.json({
-    metaTitle:       product.metaTitle,
-    metaDescription: product.metaDescription,
-    seoTags:         product.seoTags,
-  });
 });
 
 module.exports = { getProducts, getProductById, deleteProduct, createProduct, updateProduct, generateProductSEO };

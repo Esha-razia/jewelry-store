@@ -165,7 +165,7 @@ const DashboardOverview = () => {
 
       <div className="grid analytics-stats-grid">
         <div className="glass-panel stat-card">
-          <div className="stat-value">${stats.revenue}</div>
+          <div className="stat-value">Rs. {stats.revenue}</div>
           <div className="stat-label">Total Revenue</div>
         </div>
         <div className="glass-panel stat-card">
@@ -220,7 +220,7 @@ const DashboardOverview = () => {
                 <LineChart data={analytics.priceHistoryChart} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
                   <XAxis dataKey="date" stroke="rgba(255,255,255,0.5)" tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 11 }} />
-                  <YAxis stroke="rgba(255,255,255,0.5)" tick={{ fill: 'rgba(255,255,255,0.6)' }} tickFormatter={(v) => `$${v}`} />
+                  <YAxis stroke="rgba(255,255,255,0.5)" tick={{ fill: 'rgba(255,255,255,0.6)' }} tickFormatter={(v) => `Rs. ${v}`} />
                   <Tooltip contentStyle={chartTooltipStyle} />
                   <Legend />
                   {Object.keys(analytics.priceHistoryChart?.[0] || {})
@@ -266,11 +266,11 @@ const DashboardOverview = () => {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
                       <div>
                         <span className="text-muted">Current: </span>
-                        <strong style={{ textDecoration: 'line-through', color: '#ff4757' }}>${opt.currentPrice}</strong>
+                        <strong style={{ textDecoration: 'line-through', color: '#ff4757' }}>Rs. {opt.currentPrice}</strong>
                       </div>
                       <div>
                         <span className="text-gold">AI Recommended: </span>
-                        <strong style={{ color: '#2ed573', fontSize: '1rem' }}>${opt.suggestedPrice}</strong>
+                        <strong style={{ color: '#2ed573', fontSize: '1rem' }}>Rs. {opt.suggestedPrice}</strong>
                       </div>
                     </div>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>
@@ -373,7 +373,7 @@ const DashboardOverview = () => {
                     yAxisId="revenue"
                     stroke="rgba(255,255,255,0.5)"
                     tick={{ fill: 'rgba(255,255,255,0.6)', fontSize: 11 }}
-                    tickFormatter={(v) => `$${v}`}
+                    tickFormatter={(v) => `Rs. ${v}`}
                   />
                   <YAxis
                     yAxisId="units"
@@ -390,7 +390,7 @@ const DashboardOverview = () => {
                     dataKey="revenue"
                     stroke="#D4AF37"
                     fill="url(#revenueGrad)"
-                    name="Revenue ($)"
+                    name="Revenue (Rs.)"
                     dot={{ r: 3, fill: '#D4AF37' }}
                     activeDot={{ r: 5 }}
                   />

@@ -68,7 +68,7 @@ const OrderViewer = () => {
                 <td className="text-muted">{order.orderNumber || order._id.substring(18)}</td>
                 <td>{order.user?.name || 'Guest'}</td>
                 <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td>${order.totalPrice}</td>
+                <td>Rs. {order.totalPrice}</td>
                 <td>
                    <span className={`badge ${order.isPaid ? 'badge-success' : 'badge-danger'}`}>
                      {order.isPaid ? 'Paid' : 'Pending'}

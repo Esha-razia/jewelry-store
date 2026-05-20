@@ -12,7 +12,7 @@ const CATEGORIES = [
 ];
 
 const ProductCard = ({ product }) => (
-  <Link to={`/product/${product._id}`} className="home-product-card">
+  <Link to={`/product/${product.slug || product._id}`} className="home-product-card">
     <div className="home-product-media">
       <img src={product.image} alt={product.name} loading="lazy" />
       <span className="home-product-quick">Quick view</span>
@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => (
     <div className="home-product-body">
       <h3>{product.name}</h3>
       <p className="home-product-material">{product.material || 'Fine jewelry'}</p>
-      <p className="home-product-price">${product.price}</p>
+      <p className="home-product-price">Rs. {product.price}</p>
     </div>
   </Link>
 );
@@ -341,10 +341,10 @@ const Home = () => {
       {/* Promo bar ? Almas-style marquee */}
       <div className="home-announce">
         <div className="home-announce-track">
-          <span>Free shipping on orders over $100</span>
+          <span>Free shipping on orders over Rs. 100</span>
           <span>New season fine jewelry ? shop now</span>
           <span>Exclusive gold & diamond collections</span>
-          <span>Free shipping on orders over $100</span>
+          <span>Free shipping on orders over Rs. 100</span>
           <span>New season fine jewelry ? shop now</span>
           <span>Exclusive gold & diamond collections</span>
         </div>
@@ -442,7 +442,7 @@ const Home = () => {
                 </div>
                 <div className="home-sale-grid">
                   {bestSellers.map((product) => (
-                    <Link key={product._id} to={`/product/${product._id}`}>
+                    <Link key={product._id} to={`/product/${product.slug || product._id}`}>
                       <img src={product.image} alt={product.name} loading="lazy" />
                     </Link>
                   ))}

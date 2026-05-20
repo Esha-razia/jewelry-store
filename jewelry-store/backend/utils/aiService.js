@@ -519,7 +519,7 @@ const predictWithAI = (orders, products) => {
           currentPrice: current,
           percentageIncrease: parseFloat(pctIncrease.toFixed(1)),
           suggestedPrice: suggestedPrice,
-          message: `Price optimization alert: "${p.name}" has seen a steep ${pctIncrease.toFixed(0)}% price increase (from $${oldest} to $${current}). AI recommends dropping it to $${suggestedPrice} to maximize conversion and velocity.`,
+          message: `Price optimization alert: "${p.name}" has seen a steep ${pctIncrease.toFixed(0)}% price increase (from Rs. ${oldest} to Rs. ${current}). AI recommends dropping it to Rs. ${suggestedPrice} to maximize conversion and velocity.`,
         });
       }
     }

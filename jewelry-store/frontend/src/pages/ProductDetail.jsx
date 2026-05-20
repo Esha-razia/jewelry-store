@@ -5,34 +5,53 @@ import { CartContext } from '../context/CartContext';
 import { WishlistContext } from '../context/WishlistContext';
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { addToCart } = useContext(CartContext);
   const { toggleWishlist, wishlist } = useContext(WishlistContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`/api/products/${id}`);
+        setLoading(true);
+        setError(null);
+        const { data } = await axios.get(`/api/products/${slug}`);
         setProduct(data);
         setLoading(false);
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error("Error fetching product:", err);
+        setError(err.response?.data?.message || err.message || "Failed to load product");
+        setLoading(false);
       }
     };
-    fetchProduct();
-  }, [id]);
+    if (slug) {
+      fetchProduct();
+    }
+  }, [slug]);
 
   const handleAddToCart = () => {
     addToCart(product, 1);
     navigate('/cart');
   };
 
-  const isWishlisted = wishlist.includes(product._id);
+  const isWishlisted = product && product._id ? wishlist.includes(product._id) : false;
 
   if (loading) return <div style={{ textAlign: 'center', marginTop: '4rem' }}>Loading masterpiece...</div>;
+
+  if (error) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '4rem' }} className="fade-in">
+        <h2 style={{ color: 'var(--accent-gold)', marginBottom: '1.5rem' }}>Masterpiece Not Found</h2>
+        <p className="text-muted" style={{ marginBottom: '2rem' }}>{error}</p>
+        <button onClick={() => navigate('/')} className="btn btn-primary">
+          Back to Shop
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="fade-in" style={{ marginTop: '2rem' }}>
@@ -51,7 +70,7 @@ const ProductDetail = () => {
           <p className="text-gold" style={{ textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
             {product.brand} | {product.category}
           </p>
-          <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>{product.name}</h1>
+          <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', marginBottom: '1rem' }}>{product.name}</h1>
           <p className="text-muted" style={{ marginBottom: '2rem', fontSize: '1.1rem', lineHeight: '1.8' }}>
             {product.description}
           </p>
@@ -70,7 +89,7 @@ const ProductDetail = () => {
           </div>
 
           <div style={{ fontSize: '2rem', fontWeight: '400', marginBottom: '2rem', color: 'var(--text-main)' }}>
-            ${product.price}
+            Rs. {product.price}
           </div>
 
           <div style={{ display: 'flex', gap: '1rem' }}>

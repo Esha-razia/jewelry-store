@@ -59,11 +59,32 @@ const productSchema = mongoose.Schema(
       type: String,
       default: '',
     },
+    slug: {
+      type: String,
+      unique: true,
+      default: function() { return slugify(this.name); },
+    },
   },
   {
     timestamps: true,
   }
 );
+
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')          // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+};
+
+productSchema.pre('save', async function () {
+  if (this.isModified('name') || !this.slug) {
+    this.slug = slugify(this.name);
+  }
+});
 
 const Product = mongoose.model('Product', productSchema);
 

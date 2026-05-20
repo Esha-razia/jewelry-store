@@ -29,9 +29,9 @@ const Cart = () => {
                   <img src={item.image} alt={item.name} className="cart-line-img" />
                   <div style={{ minWidth: 0 }}>
                     <h4 style={{ margin: 0, fontFamily: 'var(--font-sans)', fontWeight: '500' }}>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                      <Link to={`/product/${item.slug || item.product}`}>{item.name}</Link>
                     </h4>
-                    <p className="text-gold" style={{ margin: 0 }}>${item.price}</p>
+                    <p className="text-gold" style={{ margin: 0 }}>Rs. {item.price}</p>
                   </div>
                 </div>
                 
@@ -60,7 +60,7 @@ const Cart = () => {
             <h3 style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', marginBottom: '1rem' }}>Order Summary</h3>
             <div className="flex-between" style={{ marginBottom: '1rem' }}>
               <span>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)} items)</span>
-              <span>${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</span>
+              <span>Rs. {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</span>
             </div>
             <div className="flex-between text-muted" style={{ marginBottom: '2rem', fontSize: '0.9rem' }}>
               <span>Shipping & Taxes calculated at checkout</span>

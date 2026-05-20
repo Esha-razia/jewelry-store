@@ -258,13 +258,13 @@ const OrderConfirmation = () => {
             <div key={`${item.product || item.name}_${idx}`} className="order-confirm-item">
               {item.image ? <img src={item.image} alt="" /> : null}
               <span>
-                {item.name} × {item.qty} — ${Number(item.price).toFixed(2)}
+                {item.name} × {item.qty} — Rs. {Number(item.price).toFixed(2)}
               </span>
             </div>
           ))}
           <div className="order-confirm-total">
             <span>Total</span>
-            <span>${Number(order.totalPrice).toFixed(2)}</span>
+            <span>Rs. {Number(order.totalPrice).toFixed(2)}</span>
           </div>
         </div>
       </div>

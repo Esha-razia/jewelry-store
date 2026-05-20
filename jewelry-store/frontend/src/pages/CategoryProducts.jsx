@@ -74,7 +74,7 @@ const CategoryProducts = () => {
         <div className="grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
           {products.map((product) => (
             <Link 
-              to={`/product/${product._id}`} 
+              to={`/product/${product.slug || product._id}`} 
               key={product._id} 
               className="glass-panel" 
               style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s ease' }} 
@@ -90,7 +90,7 @@ const CategoryProducts = () => {
                   <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>{product.material}</p>
                 </div>
                 <div style={{ fontWeight: '500', fontSize: '1.1rem', color: 'var(--accent-gold)' }}>
-                  ${product.price}
+                  Rs. {product.price}
                 </div>
               </div>
             </Link>

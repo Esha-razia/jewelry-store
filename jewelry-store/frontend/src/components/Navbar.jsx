@@ -69,7 +69,7 @@ const Navbar = () => {
 
           {/* Right Icons (Sign in only in hamburger menu) */}
           <div className="nav-bar-actions">
-            <Link to="/profile" aria-label="Wishlist" className="nav-icon-link">
+            <Link to="/profile?view=wishlist" aria-label="Wishlist" className="nav-icon-link">
               <Heart size={22} className="text-muted hover:text-gold" />
             </Link>
             <Link to="/cart" className="nav-icon-link nav-cart-link" aria-label="Shopping bag">
@@ -207,7 +207,7 @@ const Navbar = () => {
                 <span>My Profile</span>
               </Link>
 
-              <Link to="/profile" onClick={closeMenu} style={menuItemStyle}>
+              <Link to="/profile?view=wishlist" onClick={closeMenu} style={menuItemStyle}>
                 <Heart size={20} style={{ color: 'var(--accent-gold)' }} />
                 <span>Wishlist</span>
               </Link>

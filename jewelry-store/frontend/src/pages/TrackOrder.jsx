@@ -363,13 +363,13 @@ const TrackOrder = () => {
                 marginBottom: '0.75rem',
               }}
             >
-              Items in this order · ${Number(order.totalPrice).toFixed(2)} total
+              Items in this order · Rs. {Number(order.totalPrice).toFixed(2)} total
             </p>
             {(order.orderItems || []).map((it, idx) => (
               <div key={`${it.name}_${idx}`} className="track-item-row">
                 {it.image ? <img src={it.image} alt="" /> : null}
                 <span>
-                  {it.name} × {it.qty} — ${Number(it.price).toFixed(2)} each
+                  {it.name} × {it.qty} — Rs. {Number(it.price).toFixed(2)} each
                 </span>
               </div>
             ))}

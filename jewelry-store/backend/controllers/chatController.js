@@ -21,8 +21,8 @@ const parseIntent = (message) => {
   if (msg.includes('under') || msg.includes('cheap') || msg.includes('less than')) {
     const arr = msg.split(' ');
     // Extract a number
-    const num = arr.find(word => word.startsWith('$') || !isNaN(word));
-    if (num) maxPrice = parseInt(num.replace('$', ''));
+    const num = arr.find(word => word.startsWith('$') || word.toLowerCase().startsWith('rs') || !isNaN(word));
+    if (num) maxPrice = parseInt(num.replace('$', '').replace(/rs\.?/i, ''));
   }
 
   if (msg.includes('ring')) categoryStr = 'ring';
@@ -61,7 +61,7 @@ const handleChatMessage = asyncHandler(async (req, res) => {
       }
 
     case 'faq':
-      if (intent.query.includes('shipping')) return res.json({ text: "We offer free FedEx Priority overnight shipping on all orders over $100.", type: 'text' });
+      if (intent.query.includes('shipping')) return res.json({ text: "We offer free FedEx Priority overnight shipping on all orders over Rs. 100.", type: 'text' });
       if (intent.query.includes('return')) return res.json({ text: "We have a hassle-free 30-day money-back guarantee. No questions asked return policy.", type: 'text' });
       if (intent.query.includes('payment')) return res.json({ text: "We accept all major credit cards, PayPal, and Apple Pay.", type: 'text' });
       return res.json({ text: "I can help with Shipping, Returns, or Payment policies. Let me know which you need help with!", type: 'text' });

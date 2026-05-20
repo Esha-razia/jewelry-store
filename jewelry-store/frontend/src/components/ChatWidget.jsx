@@ -76,11 +76,11 @@ const ChatWidget = () => {
                 {msg.type === 'products' && msg.payload && (
                   <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
                     {msg.payload.map(p => (
-                      <Link to={`/product/${p._id}`} key={p._id} style={{ minWidth: '120px', background: '#000', borderRadius: '8px', overflow: 'hidden' }} onClick={toggleChat}>
+                      <Link to={`/product/${p.slug || p._id}`} key={p._id} style={{ minWidth: '120px', background: '#000', borderRadius: '8px', overflow: 'hidden' }} onClick={toggleChat}>
                         <img src={p.image} alt={p.name} style={{ width: '100%', height: '100px', objectFit: 'cover' }} />
                         <div style={{ padding: '0.5rem', fontSize: '0.8rem' }}>
                           <div style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{p.name}</div>
-                          <div className="text-gold">${p.price}</div>
+                          <div className="text-gold">Rs. {p.price}</div>
                         </div>
                       </Link>
                     ))}
@@ -88,7 +88,7 @@ const ChatWidget = () => {
                 )}
                 {msg.type === 'order_status' && msg.payload && (
                    <div style={{ marginTop: '0.5rem', padding: '0.5rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', fontSize: '0.8rem' }}>
-                     <strong>Total: </strong> ${msg.payload.totalPrice} <br/>
+                     <strong>Total: </strong> Rs. {msg.payload.totalPrice} <br/>
                      <strong>Date: </strong> {new Date(msg.payload.createdAt).toLocaleDateString()}
                    </div>
                 )}

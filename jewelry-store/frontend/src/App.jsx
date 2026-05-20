@@ -16,6 +16,8 @@ import TrackOrder from './pages/TrackOrder';
 import Contact from './pages/Contact';
 import OrderConfirmation from './pages/OrderConfirmation';
 
+
+
 function App() {
   return (
     <Router>
@@ -25,7 +27,7 @@ function App() {
         <main className="flex-grow container" style={{ marginTop: '2rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/product/:slug" element={<ProductDetail />} />
             <Route path="/category/:name" element={<CategoryProducts />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/cart" element={<Cart />} />
@@ -35,6 +37,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
+
+
           </Routes>
         </main>
         <Footer />
