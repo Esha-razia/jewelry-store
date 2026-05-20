@@ -65,7 +65,7 @@ const OrderViewer = () => {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id} style={{ fontSize: '0.85rem' }}>
-                <td className="text-muted">{order._id.substring(18)}</td>
+                <td className="text-muted">{order.orderNumber || order._id.substring(18)}</td>
                 <td>{order.user?.name || 'Guest'}</td>
                 <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                 <td>${order.totalPrice}</td>

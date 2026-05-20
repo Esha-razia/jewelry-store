@@ -78,7 +78,9 @@ const Profile = () => {
               {orders.map((order) => (
                 <div key={order._id} className="glass-panel" style={{ padding: '1.5rem' }}>
                   <div className="flex-between" style={{ marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '0.5rem' }}>
-                    <span className="text-muted" style={{ fontSize: '0.8rem' }}>Order ID: {order._id}</span>
+                    <span className="text-muted" style={{ fontSize: '0.8rem' }}>
+                      Order #{order.orderNumber || order._id}
+                    </span>
                     <span style={{ color: order.isDelivered ? '#4caf50' : 'var(--accent-gold)' }}>
                       {order.isDelivered ? 'Delivered' : 'Processing'}
                     </span>

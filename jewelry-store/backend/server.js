@@ -6,6 +6,8 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware.js');
 const userRoutes = require('./routes/userRoutes.js');
 const productRoutes = require('./routes/productRoutes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
+const { trackOrderPublic, addOrderItems } = require('./controllers/orderController.js');
+const { protect } = require('./middleware/authMiddleware.js');
 const chatRoutes = require('./routes/chatRoutes.js');
 const analyticsRoutes = require('./routes/analyticsRoutes.js');
 const newsletterRoutes = require('./routes/newsletterRoutes.js');
@@ -28,6 +30,9 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+// Express 5: register critical order routes on app (router mount can miss POST paths)
+app.post('/api/orders/track', trackOrderPublic);
+app.post('/api/orders', protect, addOrderItems);
 app.use('/api/orders', orderRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/analytics', analyticsRoutes);

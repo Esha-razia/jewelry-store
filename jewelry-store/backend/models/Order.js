@@ -1,7 +1,24 @@
 const mongoose = require('mongoose');
 
+const ORDER_NUMBER_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+const generateOrderNumber = () => {
+  let code = '';
+  for (let i = 0; i < 10; i += 1) {
+    code += ORDER_NUMBER_CHARS.charAt(Math.floor(Math.random() * ORDER_NUMBER_CHARS.length));
+  }
+  return code;
+};
+
 const orderSchema = mongoose.Schema(
   {
+    orderNumber: {
+      type: String,
+      unique: true,
+      sparse: true,
+      uppercase: true,
+      trim: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -66,6 +83,24 @@ const orderSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+orderSchema.pre('save', async function assignOrderNumber() {
+  if (this.orderNumber) {
+    return;
+  }
+  const OrderModel = mongoose.model('Order');
+  let attempts = 0;
+  while (attempts < 12) {
+    const candidate = generateOrderNumber();
+    const exists = await OrderModel.exists({ orderNumber: candidate });
+    if (!exists) {
+      this.orderNumber = candidate;
+      return;
+    }
+    attempts += 1;
+  }
+  throw new Error('Could not generate order number');
+});
 
 const Order = mongoose.model('Order', orderSchema);
 

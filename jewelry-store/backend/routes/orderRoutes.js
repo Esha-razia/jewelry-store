@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { 
-  addOrderItems, 
+  addOrderItems,
+  getOrderByNumber,
   getOrderById, 
   getMyOrders, 
   getOrders,
@@ -11,9 +12,11 @@ const {
 } = require('../controllers/orderController.js');
 const { protect, admin } = require('../middleware/authMiddleware.js');
 
-router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders);
-router.route('/track').post(trackOrderPublic);
-router.route('/myorders').get(protect, getMyOrders);
+router.post('/track', trackOrderPublic);
+router.post('/', protect, addOrderItems);
+router.get('/', protect, admin, getOrders);
+router.get('/myorders', protect, getMyOrders);
+router.route('/by-number/:orderNumber').get(protect, getOrderByNumber);
 router.route('/:id').get(protect, getOrderById);
 router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered);
 router.route('/:id/pay').put(protect, admin, updateOrderToPaid);

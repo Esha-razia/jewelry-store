@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ChevronRight, Lock } from 'lucide-react';
@@ -25,6 +25,8 @@ const Checkout = () => {
   const [saveInfo, setSaveInfo] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderError, setOrderError] = useState('');
+  const [orderComplete, setOrderComplete] = useState(false);
+  const orderPlacedRef = useRef(false);
 
   useEffect(() => {
     if (!user) {
@@ -40,10 +42,11 @@ const Checkout = () => {
   }, [user, navigate]);
 
   useEffect(() => {
+    if (orderPlacedRef.current || orderComplete) return;
     if (user && cartItems.length === 0) {
       navigate('/cart');
     }
-  }, [cartItems.length, user, navigate]);
+  }, [cartItems.length, user, navigate, orderComplete]);
 
   const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
   const taxPrice = Number((0.15 * itemsPrice).toFixed(2));
@@ -78,8 +81,33 @@ const Checkout = () => {
     e.preventDefault();
     setOrderError('');
 
+    if (!user?.token) {
+      setOrderError('Please sign in again to complete your order.');
+      navigate('/auth');
+      return;
+    }
+
     if (!firstName.trim() || !address.trim() || !city.trim() || !postalCode.trim()) {
       setOrderError('Please fill in all required delivery fields.');
+      return;
+    }
+
+    if (cartItems.length === 0) {
+      setOrderError('Your cart is empty. Add items before checking out.');
+      return;
+    }
+
+    const orderItems = cartItems.map((item) => ({
+      name: item.name,
+      qty: item.qty,
+      image: item.image,
+      price: item.price,
+      product: item.product || item._id,
+    }));
+
+    const missingProduct = orderItems.find((item) => !item.product);
+    if (missingProduct) {
+      setOrderError('A cart item is invalid. Remove it and add the product again from the shop.');
       return;
     }
 
@@ -96,7 +124,7 @@ const Checkout = () => {
         shippingMethod === 'express' ? 'Express Delivery' : 'Standard Delivery';
 
       const orderData = {
-        orderItems: cartItems,
+        orderItems,
         shippingAddress: buildShippingPayload(),
         paymentMethod: `${paymentMethod} · ${shippingLabel}`,
         itemsPrice,
@@ -105,20 +133,51 @@ const Checkout = () => {
         totalPrice: Number(totalPrice),
       };
 
-      await axios.post('/api/orders', orderData, config);
+      const { data: createdOrder } = await axios.post('/api/orders', orderData, config);
+      const confirmId = createdOrder.orderNumber || createdOrder._id;
+      if (!confirmId) {
+        throw new Error('Order was created but confirmation ID is missing. Check your profile for order history.');
+      }
+
+      orderPlacedRef.current = true;
+      setOrderComplete(true);
       clearCart();
-      setIsProcessing(false);
-      navigate('/profile');
+      navigate(`/order-confirmation/${confirmId}`, {
+        replace: true,
+        state: {
+          order: createdOrder,
+          customer: {
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            apartment,
+            city,
+            province,
+            postalCode,
+            country,
+            paymentMethod,
+            shippingMethod,
+          },
+        },
+      });
     } catch (error) {
       console.error(error);
-      setOrderError(
-        error.response?.data?.message || 'Could not place your order. Please try again.'
-      );
+      const msg = error.response?.data?.message || error.message;
+      if (msg?.includes('Not Found') && msg?.includes('/api/orders')) {
+        setOrderError('Order service is unavailable. Restart the backend server and try again.');
+      } else if (msg?.includes('Not authorized') || msg?.includes('token')) {
+        setOrderError('Your session expired. Please sign in again.');
+      } else {
+        setOrderError(msg || 'Could not place your order. Please try again.');
+      }
+    } finally {
       setIsProcessing(false);
     }
   };
 
-  if (!user || cartItems.length === 0) {
+  if (!user || (cartItems.length === 0 && !orderComplete)) {
     return null;
   }
 
@@ -570,7 +629,6 @@ const Checkout = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="03XX XXXXXXX"
-                  required
                 />
               </div>
             </div>
@@ -735,10 +793,15 @@ const Checkout = () => {
               </div>
             </div>
 
+            {orderError && (
+              <div className="checkout-error" style={{ marginBottom: '0.75rem' }}>
+                {orderError}
+              </div>
+            )}
             <button
               type="submit"
               className="btn btn-primary checkout-submit"
-              disabled={isProcessing}
+              disabled={isProcessing || cartItems.length === 0}
             >
               {isProcessing ? 'Processing…' : 'Complete order'}
             </button>

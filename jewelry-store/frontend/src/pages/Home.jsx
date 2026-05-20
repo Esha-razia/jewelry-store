@@ -29,9 +29,6 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState('');
-  const [nlStatus, setNlStatus] = useState('');
-  const [nlLoading, setNlLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,21 +59,6 @@ const Home = () => {
     if (!products.length) return [];
     return [...products].sort((a, b) => b.price - a.price).slice(0, 4);
   }, [products]);
-
-  const handleNewsletter = async (e) => {
-    e.preventDefault();
-    setNlStatus('');
-    setNlLoading(true);
-    try {
-      const { data } = await axios.post('/api/newsletter/subscribe', { email: email.trim() });
-      setNlStatus(data.message || 'You are subscribed. Thank you!');
-      setEmail('');
-    } catch (err) {
-      setNlStatus(err.response?.data?.message || err.message || 'Could not subscribe right now.');
-    } finally {
-      setNlLoading(false);
-    }
-  };
 
   return (
     <div className="home-page fade-in">
@@ -340,40 +322,6 @@ const Home = () => {
           height: 100%;
           object-fit: cover;
         }
-        .home-newsletter {
-          text-align: center;
-          padding: 3rem 1.5rem;
-          margin-bottom: 2rem;
-          border-top: 1px solid var(--border-subtle);
-          border-bottom: 1px solid var(--border-subtle);
-        }
-        .home-newsletter h2 {
-          margin: 0 0 0.5rem;
-          font-family: var(--font-sans);
-          font-size: 1.25rem;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
-        .home-newsletter p {
-          margin: 0 0 1.25rem;
-          color: var(--text-muted);
-          font-size: 0.9rem;
-        }
-        .home-newsletter-form {
-          display: flex;
-          max-width: 440px;
-          margin: 0 auto;
-          gap: 0.5rem;
-        }
-        .home-newsletter-form input {
-          flex: 1;
-          padding: 0.85rem 1rem;
-          border-radius: 2px;
-        }
-        .home-newsletter-form button {
-          padding: 0.85rem 1.5rem;
-          white-space: nowrap;
-        }
         .home-loading {
           text-align: center;
           padding: 4rem 0;
@@ -387,7 +335,6 @@ const Home = () => {
         @media (max-width: 640px) {
           .home-categories { grid-template-columns: repeat(2, 1fr); }
           .home-product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
-          .home-newsletter-form { flex-direction: column; }
         }
       `}</style>
 
@@ -527,27 +474,6 @@ const Home = () => {
             )}
           </>
         )}
-
-        {/* Newsletter ? Almas subscribe strip */}
-        <section className="home-newsletter">
-          <h2>Join our list</h2>
-          <p>Subscribe for new arrivals, offers, and style inspiration.</p>
-          <form className="home-newsletter-form" onSubmit={handleNewsletter}>
-            <input
-              type="email"
-              placeholder="Your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button type="submit" className="btn btn-primary" disabled={nlLoading}>
-              {nlLoading ? 'Sending…' : 'Subscribe'}
-            </button>
-          </form>
-          {nlStatus ? (
-            <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--accent-gold-hover)' }}>{nlStatus}</p>
-          ) : null}
-        </section>
       </div>
     </div>
   );

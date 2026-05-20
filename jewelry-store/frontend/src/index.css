@@ -121,9 +121,45 @@ a:hover {
 }
 
 .nav-bar-row {
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: row;
   flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   min-width: 0;
+  width: 100%;
+}
+
+.nav-bar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.nav-logo-jewel {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+
+.nav-logo-safa {
+  margin-left: 2px;
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--accent-gold);
 }
 
 .nav-bar-actions {
@@ -189,16 +225,22 @@ a:hover {
 @media (max-width: 640px) {
   .nav-bar-shell {
     margin: 0.5rem 0.65rem;
-    padding: 0.55rem 0.85rem;
+    padding: 0.5rem 0.65rem;
     border-radius: 16px;
   }
 
   .nav-bar-actions {
-    gap: 0.35rem;
+    gap: 0.2rem;
   }
 
-  .nav-bar-shell .nav-bar-row > div:first-child span {
-    font-size: 1.15rem !important;
+  .nav-icon-link,
+  .nav-icon-btn {
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .nav-logo span {
+    font-size: 1.05rem !important;
   }
 }
 

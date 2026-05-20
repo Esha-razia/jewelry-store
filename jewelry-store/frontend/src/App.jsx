@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
@@ -13,10 +14,12 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import ChatWidget from './components/ChatWidget';
 import TrackOrder from './pages/TrackOrder';
 import Contact from './pages/Contact';
+import OrderConfirmation from './pages/OrderConfirmation';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow container" style={{ marginTop: '2rem' }}>
@@ -27,6 +30,7 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-confirmation/:orderNumber" element={<OrderConfirmation />} />
             <Route path="/track-order" element={<TrackOrder />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/profile" element={<Profile />} />

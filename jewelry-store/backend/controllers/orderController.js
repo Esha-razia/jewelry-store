@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const asyncHandler = require('express-async-handler');
 const Order = require('../models/Order.js');
+const { buildOrderTrackingSummary } = require('../utils/orderTracking.js');
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -16,24 +17,56 @@ const addOrderItems = asyncHandler(async (req, res) => {
     totalPrice,
   } = req.body;
 
-  if (orderItems && orderItems.length === 0) {
+  if (!orderItems || orderItems.length === 0) {
     res.status(400);
     throw new Error('No order items');
-    return;
-  } else {
-    const order = new Order({
-      orderItems,
-      user: req.user._id,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-    });
+  }
 
-    const createdOrder = await order.save();
-    res.status(201).json(createdOrder);
+  const sanitizedItems = orderItems.map((item) => {
+    const productId = item.product || item._id;
+    if (!productId || !mongoose.Types.ObjectId.isValid(String(productId))) {
+      res.status(400);
+      throw new Error(`Invalid product in cart: ${item.name || 'unknown item'}`);
+    }
+    return {
+      name: item.name,
+      qty: Number(item.qty) || 1,
+      image: item.image,
+      price: Number(item.price),
+      product: productId,
+    };
+  });
+
+  const order = new Order({
+    orderItems: sanitizedItems,
+    user: req.user._id,
+    shippingAddress,
+    paymentMethod,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  });
+
+  const createdOrder = await order.save();
+  res.status(201).json(createdOrder);
+});
+
+// @desc    Get order by public order number (owner only)
+// @route   GET /api/orders/by-number/:orderNumber
+// @access  Private
+const getOrderByNumber = asyncHandler(async (req, res) => {
+  const orderNumber = (req.params.orderNumber || '').trim().toUpperCase();
+  const order = await Order.findOne({ orderNumber, user: req.user._id }).populate(
+    'user',
+    'name email'
+  );
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
   }
 });
 
@@ -72,9 +105,10 @@ const getOrders = asyncHandler(async (req, res) => {
 // @access  Public
 const trackOrderPublic = asyncHandler(async (req, res) => {
   const { orderId, email } = req.body || {};
-  if (!orderId || typeof orderId !== 'string' || !mongoose.Types.ObjectId.isValid(orderId.trim())) {
+  const lookup = (orderId || '').trim();
+  if (!lookup) {
     res.status(400);
-    throw new Error('Enter a valid order ID');
+    throw new Error('Enter your order ID');
   }
   if (!email || typeof email !== 'string' || email.trim().length < 5) {
     res.status(400);
@@ -82,7 +116,15 @@ const trackOrderPublic = asyncHandler(async (req, res) => {
   }
 
   const normalizedEmail = email.trim().toLowerCase();
-  const order = await Order.findById(orderId.trim()).populate('user', 'email name');
+  let order;
+  if (mongoose.Types.ObjectId.isValid(lookup) && lookup.length === 24) {
+    order = await Order.findById(lookup).populate('user', 'email name');
+  } else {
+    order = await Order.findOne({ orderNumber: lookup.toUpperCase() }).populate(
+      'user',
+      'email name'
+    );
+  }
 
   if (!order || !order.user || !order.user.email) {
     res.status(404);
@@ -97,6 +139,7 @@ const trackOrderPublic = asyncHandler(async (req, res) => {
 
   const safeSummary = {
     _id: order._id,
+    orderNumber: order.orderNumber,
     createdAt: order.createdAt,
     updatedAt: order.updatedAt,
     totalPrice: order.totalPrice,
@@ -112,6 +155,7 @@ const trackOrderPublic = asyncHandler(async (req, res) => {
       price: it.price,
       image: it.image,
     })),
+    tracking: buildOrderTrackingSummary(order),
   };
 
   res.json(safeSummary);
@@ -162,7 +206,8 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 });
 
 module.exports = { 
-  addOrderItems, 
+  addOrderItems,
+  getOrderByNumber,
   getOrderById, 
   getMyOrders, 
   getOrders,

@@ -40,9 +40,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="glass-panel nav-bar-shell">
-        <div className="flex-between nav-bar-row">
+        <div className="nav-bar-row">
           {/* Left Side: Hamburger + Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <div className="nav-bar-brand">
             {/* Hamburger Icon */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -59,9 +59,9 @@ const Navbar = () => {
             </button>
 
             {/* Logo */}
-            <Link to="/" style={{ display: 'flex', alignItems: 'center' }} onClick={closeMenu}>
-              <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-serif)', fontWeight: '600' }}>JEWEL</span>
-              <span style={{ marginLeft: '2px', color: 'var(--accent-gold)' }}>SAFA</span>
+            <Link to="/" className="nav-logo" onClick={closeMenu}>
+              <span className="nav-logo-jewel">JEWEL</span>
+              <span className="nav-logo-safa">SAFA</span>
             </Link>
           </div>
 
