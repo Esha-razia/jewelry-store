@@ -32,23 +32,10 @@ const CategoryProducts = () => {
   return (
     <div className="fade-in">
       {/* Top Header with Back button */}
-      <div style={{ display: 'flex', alignItems: 'center', margin: '2rem 0 3rem 0', position: 'relative' }}>
+      <div className="category-header">
         <button 
           onClick={() => navigate(-1)} 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.5rem', 
-            background: 'rgba(255, 255, 255, 0.05)', 
-            border: '1px solid rgba(255, 255, 255, 0.1)', 
-            color: 'var(--text-main)', 
-            padding: '0.6rem 1.2rem', 
-            borderRadius: '30px', 
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            position: 'absolute',
-            left: 0
-          }}
+          className="category-header-back"
           onMouseOver={(e) => e.currentTarget.style.background = 'rgba(212, 175, 55, 0.15)'}
           onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'}
         >
@@ -56,7 +43,7 @@ const CategoryProducts = () => {
           <span>Back</span>
         </button>
         
-        <h2 style={{ flexGrow: 1, textAlign: 'center', margin: 0, textTransform: 'capitalize' }}>
+        <h2 className="category-header-title">
           {categoryTitle} Collection
         </h2>
       </div>
