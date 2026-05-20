@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Mail, ChevronRight, Loader2, Truck, RotateCcw } from 'lucide-react';
 
 const Contact = () => {
@@ -10,6 +10,21 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [error, setError] = useState('');
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        // Use setTimeout to ensure the DOM has fully rendered before scrolling
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
