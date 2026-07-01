@@ -12,6 +12,7 @@ const chatRoutes = require('./routes/chatRoutes.js');
 const analyticsRoutes = require('./routes/analyticsRoutes.js');
 const newsletterRoutes = require('./routes/newsletterRoutes.js');
 const contactRoutes = require('./routes/contactRoutes.js');
+const reviewRoutes = require('./routes/reviewRoutes.js');
 
 
 // Load env variables
@@ -39,6 +40,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 
 // Basic route

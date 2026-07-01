@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
-import { ShoppingBag, Heart, User as UserIcon, LogOut, Menu, X, Home, Sparkles, TrendingUp, LayoutGrid, Shield, Gem, ChevronDown, ChevronRight, PackageSearch, Mail } from 'lucide-react';
+import { ShoppingBag, Heart, User as UserIcon, LogOut, Menu, X, Home, Sparkles, TrendingUp, LayoutGrid, Shield, Gem, ChevronDown, ChevronRight, PackageSearch, Mail, Search } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [products, setProducts] = useState([]);
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
@@ -16,6 +20,56 @@ const Navbar = () => {
     setMenuOpen(false);
     setCategoriesOpen(false);
   };
+
+  useEffect(() => {
+    if (searchOpen && products.length === 0) {
+      axios.get('/api/products')
+        .then(({ data }) => setProducts(data))
+        .catch(err => console.error("Error loading products for search:", err));
+    }
+  }, [searchOpen, products.length]);
+
+  useEffect(() => {
+    if (!searchOpen) {
+      if (!menuOpen) document.body.style.overflow = '';
+      return;
+    }
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      if (!menuOpen) document.body.style.overflow = prevOverflow;
+    };
+  }, [searchOpen, menuOpen]);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [searchOpen]);
+
+  const filteredProducts = products.filter(p => {
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return false;
+    
+    const queryWords = query.split(/\s+/).filter(w => w.length > 0);
+    if (queryWords.length === 0) return false;
+
+    const searchableText = [
+      p.name,
+      p.description,
+      p.category,
+      p.material,
+      ...(p.seoTags || [])
+    ].filter(Boolean).join(' ').toLowerCase();
+
+    return queryWords.every(word => searchableText.includes(word));
+  });
 
   useEffect(() => {
     if (!menuOpen) {
@@ -69,6 +123,14 @@ const Navbar = () => {
 
           {/* Right Icons (Sign in only in hamburger menu) */}
           <div className="nav-bar-actions">
+            <button
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search masterpieces"
+              className="nav-icon-btn nav-icon-link"
+              style={{ padding: 0 }}
+            >
+              <Search size={22} className="text-muted hover:text-gold" />
+            </button>
             <Link to="/profile?view=wishlist" aria-label="Wishlist" className="nav-icon-link">
               <Heart size={22} className="text-muted hover:text-gold" />
             </Link>
@@ -250,6 +312,78 @@ const Navbar = () => {
           </div>
         )}
       </div>
+
+      {/* Search Overlay Modal */}
+      {searchOpen && (
+        <div className="search-overlay" role="dialog" aria-modal="true" aria-label="Search masterpieces">
+          <div className="search-modal-backdrop" onClick={() => { setSearchOpen(false); setSearchQuery(''); }} />
+          <div className="search-container glass-panel fade-in">
+            <div className="search-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Gem size={20} style={{ color: 'var(--accent-gold)' }} />
+                <span className="search-title" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', letterSpacing: '0.05em' }}>Search Our Collection</span>
+              </div>
+              <button 
+                onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                className="search-close-btn"
+                aria-label="Close search"
+              >
+                <X size={22} />
+              </button>
+            </div>
+            
+            <div className="search-input-wrapper">
+              <input
+                type="text"
+                placeholder="Type to search rings, necklaces, diamonds..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+                className="search-input"
+              />
+              <Search className="search-input-icon" size={20} />
+            </div>
+
+            <div className="search-results-container">
+              {searchQuery.trim() === '' ? (
+                <div className="search-placeholder">
+                  <p className="text-muted" style={{ marginBottom: '1.5rem', fontSize: '0.95rem' }}>Discover our range of handcrafted jewelry masterpieces</p>
+                  <div className="search-suggestions">
+                    <span className="search-tag" onClick={() => setSearchQuery('Ring')}>Rings</span>
+                    <span className="search-tag" onClick={() => setSearchQuery('Gold')}>Gold</span>
+                    <span className="search-tag" onClick={() => setSearchQuery('Diamond')}>Diamond</span>
+                    <span className="search-tag" onClick={() => setSearchQuery('Necklace')}>Necklaces</span>
+                    <span className="search-tag" onClick={() => setSearchQuery('Bracelet')}>Bracelets</span>
+                  </div>
+                </div>
+              ) : filteredProducts.length > 0 ? (
+                <div className="search-results-grid">
+                  {filteredProducts.map(p => (
+                    <Link
+                      key={p._id}
+                      to={`/product/${p.slug || p._id}`}
+                      state={{ productId: p._id }}
+                      onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                      className="search-result-card"
+                    >
+                      <img src={p.image} alt={p.name} className="search-result-img" />
+                      <div className="search-result-info">
+                        <span className="search-result-name">{p.name}</span>
+                        <span className="search-result-meta">{p.material} | {p.category}</span>
+                        <span className="search-result-price">Rs. {p.price}</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="search-no-results">
+                  <p className="text-muted">No masterpieces found matching "{searchQuery}"</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

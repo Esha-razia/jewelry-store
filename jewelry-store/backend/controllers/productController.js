@@ -74,7 +74,7 @@ const createProduct = asyncHandler(async (req, res) => {
   console.log('Body:', req.body);
 
   const { 
-    name, price, description, image, brand, category, material, countInStock, seoTags, metaTitle, metaDescription 
+    name, price, description, image, brand, category, material, countInStock, seoTags, metaTitle, metaDescription, faqs 
   } = req.body;
 
   try {
@@ -91,6 +91,7 @@ const createProduct = asyncHandler(async (req, res) => {
       seoTags: seoTags || [],
       metaTitle: metaTitle || '',
       metaDescription: metaDescription || '',
+      faqs: faqs || [],
     });
 
     // Initialize price history with current price
@@ -115,7 +116,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   console.log('Body:', req.body);
 
   const { 
-    name, price, description, image, brand, category, material, countInStock, seoTags, metaTitle, metaDescription 
+    name, price, description, image, brand, category, material, countInStock, seoTags, metaTitle, metaDescription, faqs 
   } = req.body;
 
   const product = await Product.findById(req.params.id);
@@ -146,6 +147,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       if (seoTags !== undefined) product.seoTags = seoTags;
       if (metaTitle !== undefined) product.metaTitle = metaTitle;
       if (metaDescription !== undefined) product.metaDescription = metaDescription;
+      if (faqs !== undefined) product.faqs = faqs;
 
       const updatedProduct = await product.save();
       console.log('SUCCESS: Product updated');

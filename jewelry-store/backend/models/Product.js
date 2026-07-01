@@ -64,6 +64,12 @@ const productSchema = mongoose.Schema(
       unique: true,
       default: function() { return slugify(this.name); },
     },
+    faqs: [
+      {
+        question: { type: String, required: true },
+        answer: { type: String, required: true },
+      }
+    ],
   },
   {
     timestamps: true,

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Plus, Minus } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 import { WishlistContext } from '../context/WishlistContext';
 
@@ -13,6 +14,36 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const { addToCart } = useContext(CartContext);
   const { toggleWishlist, wishlist } = useContext(WishlistContext);
+  
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  // Generate dynamic FAQs as fallback if product faqs are missing
+  const getDynamicFAQs = () => {
+    const name = product.name || 'this jewelry masterpiece';
+    const material = product.material || 'precious metals';
+    const category = (product.category || 'Jewelry').toLowerCase().replace(/s$/, '');
+
+    return [
+      {
+        question: `Is this ${name} crafted from authentic materials?`,
+        answer: `Yes, absolutely. The ${name} is meticulously handcrafted using genuine, certified ${material}. Each piece undergoes strict quality inspections and is hallmarked for metal purity.`
+      },
+      {
+        question: `How should I clean and maintain my ${material} ${category}?`,
+        answer: `To preserve the luster of your ${category}, we recommend cleaning it gently with a soft lint-free jewelry cloth. Avoid exposing the ${material} to harsh chemicals, perfumes, chlorine, or direct contact with water for extended periods.`
+      },
+      {
+        question: `What are the shipping details and returns for this product?`,
+        answer: `We provide free, 100% insured, secure delivery across the country for all our items. The ${name} comes with a 14-day hassle-free return policy, provided it remains in its original unworn condition with all security tags intact.`
+      },
+      {
+        question: `Does the ${name} come with a certificate of authenticity?`,
+        answer: `Yes, every purchase from JEWELSAFA includes an official, hand-signed Certificate of Authenticity detailing the exact specifications of the ${material} and craftsmanship used.`
+      }
+    ];
+  };
+
+  const faqsToRender = product.faqs && product.faqs.length > 0 ? product.faqs : getDynamicFAQs();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -123,6 +154,68 @@ const ProductDetail = () => {
               ))}
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Product FAQs Section */}
+      <div className="product-faq-section glass-panel" style={{ marginTop: '4rem', padding: '3rem 2rem' }}>
+        <h2 style={{ fontSize: '1.8rem', textAlign: 'center', marginBottom: '2.5rem', fontFamily: 'var(--font-serif)' }}>
+          Frequently Asked Questions
+        </h2>
+        <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {faqsToRender.map((faq, index) => {
+            const isOpen = openFaqIndex === index;
+            return (
+              <div 
+                key={index} 
+                className="faq-item" 
+                style={{ 
+                  borderBottom: '1px solid var(--border-subtle)', 
+                  paddingBottom: '0.5rem',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <button
+                  onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                  style={{
+                    width: '100%',
+                    background: 'none',
+                    border: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '1rem 0',
+                    cursor: 'pointer',
+                    color: 'var(--text-main)',
+                    textAlign: 'left',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '1.05rem',
+                    fontWeight: '500',
+                  }}
+                >
+                  <span style={{ color: isOpen ? 'var(--accent-gold)' : 'var(--text-main)', transition: 'color 0.2s ease' }}>
+                    {faq.question}
+                  </span>
+                  <span style={{ color: 'var(--accent-gold)' }}>
+                    {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+                  </span>
+                </button>
+                
+                <div
+                  style={{
+                    maxHeight: isOpen ? '500px' : '0px',
+                    overflow: 'hidden',
+                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                >
+                  <p className="text-muted" style={{ padding: '0.5rem 0 1rem 0', fontSize: '0.95rem', lineHeight: '1.7' }}>
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
