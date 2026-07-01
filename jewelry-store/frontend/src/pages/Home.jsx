@@ -341,10 +341,10 @@ const Home = () => {
       {/* Promo bar ? Almas-style marquee */}
       <div className="home-announce">
         <div className="home-announce-track">
-          <span>Free shipping on orders over Rs. 100</span>
+          <span>Free shipping on orders over Rs. 2000</span>
           <span>New season fine jewelry ? shop now</span>
           <span>Exclusive gold & diamond collections</span>
-          <span>Free shipping on orders over Rs. 100</span>
+          <span>Free shipping on orders over Rs. 2000</span>
           <span>New season fine jewelry ? shop now</span>
           <span>Exclusive gold & diamond collections</span>
         </div>
