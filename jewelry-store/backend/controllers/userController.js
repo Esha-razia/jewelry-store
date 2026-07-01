@@ -86,6 +86,19 @@ const toggleWishlist = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get logged in user's wishlist
+// @route   GET /api/users/wishlist
+// @access  Private
+const getWishlist = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json(user.wishlist);
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
 
 // @desc    Get all users
 // @route   GET /api/users
@@ -153,6 +166,7 @@ module.exports = {
   authUser, 
   registerUser, 
   toggleWishlist,
+  getWishlist,
   getUsers,
   deleteUser,
   getUserById,
