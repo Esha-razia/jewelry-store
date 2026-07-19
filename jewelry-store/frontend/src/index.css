@@ -1605,3 +1605,234 @@ th {
   }
 }
 
+/* --- Responsive Grid Layout Switchers --- */
+.product-grid-layout {
+  display: grid;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-grid-layout.cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.product-grid-layout.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-grid-layout.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .product-grid-layout.cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .product-grid-layout.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-grid-layout.cols-4,
+  .product-grid-layout.cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .product-grid-layout.cols-1 a {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .product-grid-layout.cols-1 a div:first-child {
+    width: 100% !important;
+    height: 200px !important;
+  }
+}
+
+.grid-switch-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.grid-switch-btn:hover {
+  color: var(--accent-gold);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 175, 55, 0.15);
+}
+
+.grid-switch-btn.active {
+  color: var(--accent-gold) !important;
+  background: rgba(212, 175, 55, 0.1) !important;
+  border-color: rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+}
+
+.grid-switch-btn.active svg {
+  stroke-width: 2px;
+}
+
+.filters-toggle-btn {
+  border-radius: 30px;
+  padding: 0.5rem 1.25rem !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.filters-toggle-btn:hover {
+  background: rgba(212, 175, 55, 0.08) !important;
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.1);
+}
+
+.filters-toggle-btn.active {
+  background: rgba(212, 175, 55, 0.12) !important;
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+}
+
+/* --- Premium Reviews Submission Form & Cards --- */
+.review-submission-form {
+  padding: 2.25rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.review-submission-form h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem;
+}
+
+.review-form-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .review-form-grid {
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-gold);
+}
+
+.review-submission-form input,
+.review-submission-form textarea {
+  padding: 0.85rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.review-submission-form input:focus,
+.review-submission-form textarea:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.star-rating-selector {
+  display: flex;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  justify-content: center;
+  width: fit-content;
+}
+
+.star-select-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 1.85rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.star-select-btn:hover {
+  transform: scale(1.2);
+}
+
+.star-select-btn.active {
+  color: var(--accent-gold) !important;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+.review-form-error {
+  font-size: 0.88rem;
+  color: #ff5555;
+  background: rgba(255, 85, 85, 0.08);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 85, 85, 0.2);
+  margin: 0;
+}
+
+/* Premium Review Cards Styling */
+.review-card {
+  border: 1px solid rgba(212, 175, 55, 0.12) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(12px);
+}
+
+.review-card:hover {
+  border-color: rgba(212, 175, 55, 0.35) !important;
+  background: rgba(212, 175, 55, 0.03) !important;
+  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.08) !important;
+}
+
+.verified-badge {
+  color: var(--accent-gold) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+
