@@ -1066,49 +1066,127 @@ th {
   cursor: pointer;
 }
 
-/* Colorized Social Icons */
+/* Colorized Social Icons — explicit fill overrides currentColor */
+.site-footer-social-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
 .site-footer-social-icon.facebook {
-  color: #ffffff;
   background: #1877f2;
-  border-color: #1877f2;
 }
 .site-footer-social-icon.facebook:hover {
-  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.4);
-  transform: translateY(-3px) scale(1.08);
-  filter: brightness(1.1);
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.5);
+  transform: translateY(-3px) scale(1.1);
 }
 
 .site-footer-social-icon.whatsapp {
-  color: #ffffff;
   background: #25d366;
-  border-color: #25d366;
 }
 .site-footer-social-icon.whatsapp:hover {
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
-  transform: translateY(-3px) scale(1.08);
-  filter: brightness(1.1);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.5);
+  transform: translateY(-3px) scale(1.1);
 }
 
 .site-footer-social-icon.twitter {
-  color: #ffffff;
-  background: #1da1f2;
-  border-color: #1da1f2;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,0.15);
 }
 .site-footer-social-icon.twitter:hover {
-  box-shadow: 0 4px 14px rgba(29, 161, 242, 0.4);
-  transform: translateY(-3px) scale(1.08);
-  filter: brightness(1.1);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px) scale(1.1);
 }
 
 .site-footer-social-icon.instagram {
-  color: #ffffff;
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  border-color: transparent;
 }
 .site-footer-social-icon.instagram:hover {
-  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.4);
-  transform: translateY(-3px) scale(1.08);
-  filter: brightness(1.1);
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.5);
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* --- Footer Column Accordion --- */
+.footer-col-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 0;
+  cursor: pointer;
+  color: var(--text-main);
+  margin-bottom: 0;
+}
+
+.footer-col-toggle:hover h3 {
+  color: var(--accent-gold);
+}
+
+.footer-col-toggle h3 {
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+  transition: color 0.2s ease;
+}
+
+.footer-col-icon {
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: var(--accent-gold);
+  line-height: 1;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.footer-col-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-col-links.open {
+  max-height: 400px;
+}
+
+.footer-col-links a,
+.footer-col-links p {
+  padding: 0.55rem 0;
+  font-size: 0.88rem;
+}
+
+/* On desktop, always show all footer columns expanded */
+@media (min-width: 768px) {
+  .footer-col-toggle {
+    border-bottom: none;
+    padding: 0;
+    cursor: default;
+    pointer-events: none;
+  }
+  .footer-col-icon {
+    display: none;
+  }
+  .footer-col-links {
+    max-height: none !important;
+    overflow: visible;
+    gap: 0.35rem;
+    margin-top: 1rem;
+  }
 }
 
 /* Secure Checkout styles */

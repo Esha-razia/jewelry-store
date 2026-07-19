@@ -18,6 +18,11 @@ const Footer = () => {
   const [reviewComment, setReviewComment] = useState('');
   const [submittingReview, setSubmittingReview] = useState(false);
   const [reviewError, setReviewError] = useState('');
+  
+  // Footer column accordion (mobile)
+  const [openFooterCol, setOpenFooterCol] = useState(null);
+  const toggleFooterCol = (col) => setOpenFooterCol(prev => prev === col ? null : col);
+
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -206,48 +211,69 @@ const Footer = () => {
             </p>
             <div className="site-footer-social-row">
               <a href="https://www.facebook.com/" className="site-footer-social-icon facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="white"/>
                 </svg>
               </a>
               <a href="https://wa.me/" className="site-footer-social-icon whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.745 1.451 5.436 0 9.86-4.42 9.864-9.864.002-2.637-1.03-5.115-2.906-6.99C16.474 1.875 13.998.84 11.36.84 5.924.84 1.5 5.256 1.496 10.693c-.001 1.637.478 3.238 1.386 4.666l-.934 3.41 3.5-.918zM17.5 14.1c-.28-.14-1.65-.81-1.91-.9-.26-.1-.45-.14-.64.14-.19.28-.73.9-.9 1.1-.17.18-.34.2-.62.06-.28-.14-1.18-.44-2.25-1.4-1.34-1.2-1.87-1.5-2.05-1.7-.18-.28-.02-.43.12-.57.13-.13.28-.34.42-.51.14-.17.18-.29.28-.49.1-.2.05-.38-.02-.52-.07-.14-.64-1.55-.88-2.12-.23-.57-.47-.49-.64-.5-.16-.01-.36-.01-.56-.01-.2 0-.52.07-.79.37-.27.3-1.03 1-1.03 2.45s1.07 2.85 1.22 3.05c.15.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.65-.67 1.88-1.32.23-.65.23-1.2.16-1.32-.06-.11-.25-.19-.53-.33z"/>
+                <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="white"/>
                 </svg>
               </a>
-              <a href="https://twitter.com/" className="site-footer-social-icon twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              <a href="https://twitter.com/" className="site-footer-social-icon twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="white"/>
                 </svg>
               </a>
               <a href="https://www.instagram.com/" className="site-footer-social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C9.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="white"/>
                 </svg>
               </a>
             </div>
           </div>
+
+          {/* Shop Column with accordion */}
           <div className="site-footer-col">
-            <h3>Shop</h3>
-            <Link to="/category/rings">Rings</Link>
-            <Link to="/category/necklaces">Necklaces</Link>
-            <Link to="/category/earrings">Earrings</Link>
-            <Link to="/category/bracelets">Bracelets</Link>
-            <Link to="/category/bangles">Bangles</Link>
+            <button className="footer-col-toggle" onClick={() => toggleFooterCol('shop')}>
+              <h3 style={{ margin: 0 }}>Shop</h3>
+              <span className="footer-col-icon">{openFooterCol === 'shop' ? '−' : '+'}</span>
+            </button>
+            <div className={`footer-col-links ${openFooterCol === 'shop' ? 'open' : ''}`}>
+              <Link to="/category/rings">Rings</Link>
+              <Link to="/category/necklaces">Necklaces</Link>
+              <Link to="/category/earrings">Earrings</Link>
+              <Link to="/category/bracelets">Bracelets</Link>
+              <Link to="/category/bangles">Bangles</Link>
+            </div>
           </div>
+
+          {/* Help Column with accordion */}
           <div className="site-footer-col">
-            <h3>Help</h3>
-            <Link to="/track-order">Track order</Link>
-            <Link to="/contact">Contact us</Link>
-            <Link to="/contact#shipping">Shipping policy</Link>
-            <Link to="/contact#returns">Returns</Link>
-            <Link to="/auth">Account / Sign in</Link>
+            <button className="footer-col-toggle" onClick={() => toggleFooterCol('help')}>
+              <h3 style={{ margin: 0 }}>Help</h3>
+              <span className="footer-col-icon">{openFooterCol === 'help' ? '−' : '+'}</span>
+            </button>
+            <div className={`footer-col-links ${openFooterCol === 'help' ? 'open' : ''}`}>
+              <Link to="/track-order">Track order</Link>
+              <Link to="/contact">Contact us</Link>
+              <Link to="/contact#shipping">Shipping policy</Link>
+              <Link to="/contact#returns">Returns</Link>
+              <Link to="/auth">Account / Sign in</Link>
+            </div>
           </div>
+
+          {/* Reach us Column with accordion */}
           <div className="site-footer-col">
-            <h3>Reach us</h3>
-            <p className="text-muted">Mon–Sat, 10am–6pm</p>
-            <a href="mailto:hello@jewelsafa.example">hello@jewelsafa.example</a>
-            <p className="text-muted site-footer-muted-small">Replace this email with your real support address anytime.</p>
+            <button className="footer-col-toggle" onClick={() => toggleFooterCol('reach')}>
+              <h3 style={{ margin: 0 }}>Reach us</h3>
+              <span className="footer-col-icon">{openFooterCol === 'reach' ? '−' : '+'}</span>
+            </button>
+            <div className={`footer-col-links ${openFooterCol === 'reach' ? 'open' : ''}`}>
+              <p className="text-muted">Mon–Sat, 10am–6pm</p>
+              <a href="mailto:hello@jewelsafa.example">hello@jewelsafa.example</a>
+              <p className="text-muted site-footer-muted-small">Replace this email with your real support address anytime.</p>
+            </div>
           </div>
         </div>
 

@@ -14,7 +14,7 @@ const CategoryProducts = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [inStockOnly, setInStockOnly] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [colsCount, setColsCount] = useState(4); // Default grid layout (4 columns)
+  const [colsCount, setColsCount] = useState(2); // Default grid layout (2 columns)
 
   useEffect(() => {
     // Reset filters when category changes
@@ -130,19 +130,7 @@ const CategoryProducts = () => {
                   <rect x="13" y="3" width="8" height="18" rx="1" />
                 </svg>
               </button>
-              <button 
-                onClick={() => setColsCount(4)}
-                className={`grid-switch-btn ${colsCount === 4 ? 'active' : ''}`}
-                style={{ padding: '0.4rem', border: 'none', background: 'none', cursor: 'pointer', display: 'flex', color: colsCount === 4 ? 'var(--accent-gold)' : 'var(--text-muted)', transition: 'color 0.3s' }}
-                aria-label="4 Columns Grid"
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="8" height="8" rx="1" />
-                  <rect x="13" y="3" width="8" height="8" rx="1" />
-                  <rect x="3" y="13" width="8" height="8" rx="1" />
-                  <rect x="13" y="13" width="8" height="8" rx="1" />
-                </svg>
-              </button>
+
             </div>
 
             {/* Filters Toggle Button (Right Side) */}
@@ -254,8 +242,8 @@ const CategoryProducts = () => {
                   onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                 >
                   <div style={{ 
-                    height: colsCount === 1 ? '240px' : '200px', 
-                    width: colsCount === 1 ? '320px' : '100%', 
+                    height: colsCount === 1 ? '360px' : '200px', 
+                    width: colsCount === 1 ? '400px' : '100%', 
                     flexShrink: 0,
                     overflow: 'hidden' 
                   }}>

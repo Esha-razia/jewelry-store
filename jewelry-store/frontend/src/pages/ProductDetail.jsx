@@ -99,10 +99,7 @@ const ProductDetail = () => {
           <p className="text-gold" style={{ textTransform: 'uppercase', letterSpacing: '0.2em', fontSize: '0.8rem', marginBottom: '0.5rem' }}>
             {product.brand} | {product.category}
           </p>
-          <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', marginBottom: '1rem' }}>{product.name}</h1>
-          <p className="text-muted" style={{ marginBottom: '2rem', fontSize: '1.1rem', lineHeight: '1.8' }}>
-            {product.description}
-          </p>
+          <h1 style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)', marginBottom: '2rem' }}>{product.name}</h1>
           
           <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)', padding: '1rem 0' }}>
             <div>
@@ -139,79 +136,77 @@ const ProductDetail = () => {
             </button>
           </div>
 
-          {/* Render SEO tags if they exist (Demo purposes) */}
-          {product.seoTags && product.seoTags.length > 0 && (
-            <div style={{ marginTop: '2rem' }}>
-              <span className="text-muted" style={{ fontSize: '0.8rem' }}>Keywords: </span>
-              {product.seoTags.map((tag, i) => (
-                <span key={i} style={{ fontSize: '0.8rem', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: '12px', marginRight: '5px' }}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Product FAQs Section */}
-      <div className="product-faq-section glass-panel" style={{ marginTop: '4rem', padding: '3rem 2rem' }}>
-        <h2 style={{ fontSize: '1.8rem', textAlign: 'center', marginBottom: '2.5rem', fontFamily: 'var(--font-serif)' }}>
-          Frequently Asked Questions
-        </h2>
-        <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {faqsToRender.map((faq, index) => {
-            const isOpen = openFaqIndex === index;
-            return (
-              <div 
-                key={index} 
-                className="faq-item" 
-                style={{ 
-                  borderBottom: '1px solid var(--border-subtle)', 
-                  paddingBottom: '0.5rem',
-                  transition: 'all 0.3s ease'
+          {/* Description + FAQs as accordion dropdowns below Add to Cart */}
+          <div style={{ marginTop: '2rem', borderTop: '1px solid var(--border-subtle)' }}>
+            {/* Description accordion */}
+            <div style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+              <button
+                onClick={() => setOpenFaqIndex(openFaqIndex === 'desc' ? null : 'desc')}
+                style={{
+                  width: '100%', background: 'none', border: 'none',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '1.1rem 0', cursor: 'pointer', color: 'var(--text-main)',
+                  fontFamily: 'var(--font-sans)', fontSize: '1rem', fontWeight: '600',
+                  letterSpacing: '0.02em'
                 }}
               >
-                <button
-                  onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                  style={{
-                    width: '100%',
-                    background: 'none',
-                    border: 'none',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '1rem 0',
-                    cursor: 'pointer',
-                    color: 'var(--text-main)',
-                    textAlign: 'left',
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '1.05rem',
-                    fontWeight: '500',
-                  }}
-                >
-                  <span style={{ color: isOpen ? 'var(--accent-gold)' : 'var(--text-main)', transition: 'color 0.2s ease' }}>
-                    {faq.question}
-                  </span>
-                  <span style={{ color: 'var(--accent-gold)' }}>
-                    {isOpen ? <Minus size={18} /> : <Plus size={18} />}
-                  </span>
-                </button>
-                
-                <div
-                  style={{
+                <span style={{ color: openFaqIndex === 'desc' ? 'var(--accent-gold)' : 'var(--text-main)', transition: 'color 0.2s' }}>
+                  Description
+                </span>
+                <span style={{ color: 'var(--accent-gold)', fontSize: '1.3rem', lineHeight: 1, fontWeight: '300' }}>
+                  {openFaqIndex === 'desc' ? '−' : '+'}
+                </span>
+              </button>
+              <div style={{
+                maxHeight: openFaqIndex === 'desc' ? '400px' : '0px',
+                overflow: 'hidden',
+                transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                opacity: openFaqIndex === 'desc' ? 1 : 0
+              }}>
+                <p className="text-muted" style={{ padding: '0.25rem 0 1.25rem 0', fontSize: '0.95rem', lineHeight: '1.75' }}>
+                  {product.description}
+                </p>
+              </div>
+            </div>
+
+            {/* FAQs accordion items */}
+            {faqsToRender.map((faq, index) => {
+              const key = `faq-${index}`;
+              const isOpen = openFaqIndex === key;
+              return (
+                <div key={key} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <button
+                    onClick={() => setOpenFaqIndex(isOpen ? null : key)}
+                    style={{
+                      width: '100%', background: 'none', border: 'none',
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      padding: '1.1rem 0', cursor: 'pointer', color: 'var(--text-main)',
+                      fontFamily: 'var(--font-sans)', fontSize: '1rem', fontWeight: '600',
+                      textAlign: 'left', letterSpacing: '0.02em'
+                    }}
+                  >
+                    <span style={{ color: isOpen ? 'var(--accent-gold)' : 'var(--text-main)', transition: 'color 0.2s', paddingRight: '1rem' }}>
+                      {faq.question}
+                    </span>
+                    <span style={{ color: 'var(--accent-gold)', fontSize: '1.3rem', lineHeight: 1, fontWeight: '300', flexShrink: 0 }}>
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
+                  <div style={{
                     maxHeight: isOpen ? '500px' : '0px',
                     overflow: 'hidden',
-                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                    opacity: isOpen ? 1 : 0,
-                  }}
-                >
-                  <p className="text-muted" style={{ padding: '0.5rem 0 1rem 0', fontSize: '0.95rem', lineHeight: '1.7' }}>
-                    {faq.answer}
-                  </p>
+                    transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                    opacity: isOpen ? 1 : 0
+                  }}>
+                    <p className="text-muted" style={{ padding: '0.25rem 0 1.25rem 0', fontSize: '0.95rem', lineHeight: '1.75' }}>
+                      {faq.answer}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
         </div>
       </div>
     </div>
@@ -219,3 +214,4 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
