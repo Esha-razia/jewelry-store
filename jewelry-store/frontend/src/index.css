@@ -1623,23 +1623,7 @@ th {
   grid-template-columns: repeat(4, 1fr);
 }
 
-@media (max-width: 1200px) {
-  .product-grid-layout.cols-4 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .product-grid-layout.cols-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 600px) {
-  .product-grid-layout.cols-4,
-  .product-grid-layout.cols-2 {
-    grid-template-columns: 1fr;
-  }
   .product-grid-layout.cols-1 a {
     flex-direction: column !important;
     align-items: stretch !important;

@@ -88,10 +88,6 @@ const ProductDetail = () => {
 
   return (
     <div className="fade-in" style={{ marginTop: '2rem' }}>
-      <button onClick={() => navigate(-1)} className="btn btn-outline" style={{ marginBottom: '2rem', fontSize: '0.8rem', padding: '0.5rem 1rem' }}>
-        &larr; GO BACK
-      </button>
-      
       <div className="grid" style={{ gridTemplateColumns: 'minmax(300px, 1fr) minmax(300px, 1fr)', gap: '4rem', alignItems: 'center' }}>
         {/* Image Display */}
         <div className="glass-panel" style={{ padding: '1rem' }}>

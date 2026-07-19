@@ -87,19 +87,9 @@ const CategoryProducts = () => {
 
   return (
     <div className="fade-in">
-      {/* Top Header with Back button */}
-      <div className="category-header">
-        <button 
-          onClick={() => navigate(-1)} 
-          className="category-header-back"
-          onMouseOver={(e) => e.currentTarget.style.background = 'rgba(212, 175, 55, 0.15)'}
-          onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'}
-        >
-          <ArrowLeft size={18} />
-          <span>Back</span>
-        </button>
-        
-        <h2 className="category-header-title">
+      {/* Top Header */}
+      <div className="category-header" style={{ justifyContent: 'center', textAlign: 'center', margin: '2rem 0 3rem 0' }}>
+        <h2 className="category-header-title" style={{ width: '100%', margin: '0' }}>
           {categoryTitle} Collection
         </h2>
       </div>
@@ -182,45 +172,39 @@ const CategoryProducts = () => {
 
           {/* Togglable Filter Drawer */}
           {filtersOpen && (
-            <div className="glass-panel category-filter-bar fade-in" style={{ padding: '1.25rem 2rem', marginBottom: '2rem', display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', flex: '1 1 auto' }}>
+            <div className="glass-panel category-filter-bar fade-in" style={{ padding: '1rem 1.5rem', marginBottom: '2rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center', flex: '1 1 auto' }}>
                 
                 {/* Category Search Input */}
-                <div className="filter-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', minWidth: '220px', flex: '1 1 auto', maxWidth: '320px' }}>
-                  <span className="text-muted" style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Search {categoryTitle}</span>
-                  <input 
-                    type="text"
-                    placeholder="Type to filter..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem' }}
-                  />
-                </div>
+                <input 
+                  type="text"
+                  placeholder={`Search ${categoryTitle}...`}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{ padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', minWidth: '200px', flex: '1 1 auto', maxWidth: '300px' }}
+                />
 
                 {/* Sort Filter */}
-                <div className="filter-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', minWidth: '160px' }}>
-                  <span className="text-muted" style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Sort By</span>
-                  <select 
-                    value={sortBy} 
-                    onChange={(e) => setSortBy(e.target.value)}
-                    style={{ padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', cursor: 'pointer' }}
-                  >
-                    <option value="featured">Featured</option>
-                    <option value="price-low-high">Price: Low to High</option>
-                    <option value="price-high-low">Price: High to Low</option>
-                    <option value="name-a-z">Name: A to Z</option>
-                    <option value="name-z-a">Name: Z to A</option>
-                  </select>
-                </div>
+                <select 
+                  value={sortBy} 
+                  onChange={(e) => setSortBy(e.target.value)}
+                  style={{ padding: '0.6rem 1.8rem 0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', cursor: 'pointer', background: '#141414', color: '#fff', border: '1px solid var(--border-subtle)' }}
+                >
+                  <option value="featured">Featured Sort</option>
+                  <option value="price-low-high">Price: Low to High</option>
+                  <option value="price-high-low">Price: High to Low</option>
+                  <option value="name-a-z">Name: A to Z</option>
+                  <option value="name-z-a">Name: Z to A</option>
+                </select>
 
                 {/* In Stock Only Checkbox */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginTop: '1.25rem', cursor: 'pointer' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                   <input 
                     type="checkbox" 
                     id="stock-filter"
                     checked={inStockOnly} 
                     onChange={(e) => setInStockOnly(e.target.checked)}
-                    style={{ width: '16px', height: '16px', cursor: 'pointer', accentColor: 'var(--accent-gold)' }}
+                    style={{ width: '15px', height: '15px', cursor: 'pointer', accentColor: 'var(--accent-gold)' }}
                   />
                   <label htmlFor="stock-filter" style={{ fontSize: '0.85rem', color: 'var(--text-main)', cursor: 'pointer', userSelect: 'none' }}>
                     In Stock Only
@@ -234,9 +218,9 @@ const CategoryProducts = () => {
                 <button 
                   onClick={handleResetFilters}
                   className="btn btn-outline"
-                  style={{ padding: '0.5rem 1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderRadius: '8px', border: '1px dashed var(--accent-gold)', color: 'var(--accent-gold)' }}
+                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderRadius: '8px', border: '1px dashed var(--accent-gold)', color: 'var(--accent-gold)' }}
                 >
-                  Reset
+                  Clear
                 </button>
               )}
             </div>
