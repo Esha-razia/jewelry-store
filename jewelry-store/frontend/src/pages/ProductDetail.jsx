@@ -158,7 +158,7 @@ const ProductDetail = () => {
                 </span>
               </button>
               <div style={{
-                maxHeight: openFaqIndex === 'desc' ? '400px' : '0px',
+                maxHeight: openFaqIndex === 'desc' ? '800px' : '0px',
                 overflow: 'hidden',
                 transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 opacity: openFaqIndex === 'desc' ? 1 : 0
