@@ -410,7 +410,7 @@ const Home = () => {
                 </a>
               </div>
               <div className="home-product-grid">
-                {products.map((product) => (
+                {products.slice(0, 6).map((product) => (
                   <ProductCard key={product._id} product={product} />
                 ))}
               </div>

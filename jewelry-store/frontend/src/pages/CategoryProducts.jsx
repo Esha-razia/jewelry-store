@@ -160,57 +160,19 @@ const CategoryProducts = () => {
 
           {/* Togglable Filter Drawer */}
           {filtersOpen && (
-            <div className="glass-panel category-filter-bar fade-in" style={{ padding: '1rem 1.5rem', marginBottom: '2rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center', flex: '1 1 auto' }}>
-                
-                {/* Category Search Input */}
-                <input 
-                  type="text"
-                  placeholder={`Search ${categoryTitle}...`}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ padding: '0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', minWidth: '200px', flex: '1 1 auto', maxWidth: '300px' }}
-                />
-
-                {/* Sort Filter */}
-                <select 
-                  value={sortBy} 
-                  onChange={(e) => setSortBy(e.target.value)}
-                  style={{ padding: '0.6rem 1.8rem 0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', cursor: 'pointer', background: '#141414', color: '#fff', border: '1px solid var(--border-subtle)' }}
-                >
-                  <option value="featured">Featured Sort</option>
-                  <option value="price-low-high">Price: Low to High</option>
-                  <option value="price-high-low">Price: High to Low</option>
-                  <option value="name-a-z">Name: A to Z</option>
-                  <option value="name-z-a">Name: Z to A</option>
-                </select>
-
-                {/* In Stock Only Checkbox */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
-                  <input 
-                    type="checkbox" 
-                    id="stock-filter"
-                    checked={inStockOnly} 
-                    onChange={(e) => setInStockOnly(e.target.checked)}
-                    style={{ width: '15px', height: '15px', cursor: 'pointer', accentColor: 'var(--accent-gold)' }}
-                  />
-                  <label htmlFor="stock-filter" style={{ fontSize: '0.85rem', color: 'var(--text-main)', cursor: 'pointer', userSelect: 'none' }}>
-                    In Stock Only
-                  </label>
-                </div>
-
-              </div>
-
-              {/* Reset Filters button */}
-              {isFilterActive && (
-                <button 
-                  onClick={handleResetFilters}
-                  className="btn btn-outline"
-                  style={{ padding: '0.4rem 0.8rem', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderRadius: '8px', border: '1px dashed var(--accent-gold)', color: 'var(--accent-gold)' }}
-                >
-                  Clear
-                </button>
-              )}
+            <div className="glass-panel category-filter-bar fade-in" style={{ padding: '0.75rem 1.5rem', marginBottom: '2rem', display: 'flex', justifyContent: 'flex-end' }}>
+              {/* Sort Filter */}
+              <select 
+                value={sortBy} 
+                onChange={(e) => setSortBy(e.target.value)}
+                style={{ padding: '0.6rem 1.8rem 0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', cursor: 'pointer', background: '#141414', color: '#fff', border: '1px solid var(--border-subtle)', minWidth: '220px' }}
+              >
+                <option value="featured">Featured Sort</option>
+                <option value="price-low-high">Price: Low to High</option>
+                <option value="price-high-low">Price: High to Low</option>
+                <option value="name-a-z">Name: A to Z</option>
+                <option value="name-z-a">Name: Z to A</option>
+              </select>
             </div>
           )}
 
@@ -228,38 +190,22 @@ const CategoryProducts = () => {
                   to={`/product/${product.slug || product._id}`} 
                   state={{ productId: product._id }}
                   key={product._id} 
-                  className="glass-panel" 
-                  style={{ 
-                    textDecoration: 'none', 
-                    color: 'inherit', 
-                    display: 'flex', 
-                    flexDirection: colsCount === 1 ? 'row' : 'column', 
-                    alignItems: colsCount === 1 ? 'center' : 'stretch',
-                    transition: 'transform 0.3s ease',
-                    overflow: 'hidden'
-                  }} 
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'} 
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                  className="product-card-link glass-panel"
                 >
-                  <div style={{ 
-                    height: colsCount === 1 ? '360px' : '200px', 
-                    width: colsCount === 1 ? '400px' : '100%', 
-                    flexShrink: 0,
-                    overflow: 'hidden' 
-                  }}>
-                    <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div className="product-card-image-wrapper">
+                    <img src={product.image} alt={product.name} />
                   </div>
-                  <div style={{ padding: '1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: colsCount === 1 ? '100%' : 'auto' }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.2rem', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-sans)', fontWeight: '600' }}>{product.name}</h3>
-                      <p className="text-muted" style={{ fontSize: '0.9rem', marginBottom: '0.75rem' }}>{product.material}</p>
+                  <div className="product-card-info-wrapper">
+                    <div className="product-card-meta">
+                      <h3>{product.name}</h3>
+                      <p className="product-card-material">{product.material}</p>
                       {colsCount === 1 && (
-                        <p className="text-muted" style={{ fontSize: '0.9rem', margin: '0.75rem 0', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        <p className="product-card-desc">
                           {product.description}
                         </p>
                       )}
                     </div>
-                    <div style={{ fontWeight: '500', fontSize: '1.1rem', color: 'var(--accent-gold)', marginTop: colsCount === 1 ? '1rem' : '0' }}>
+                    <div className="product-card-price">
                       Rs. {product.price}
                     </div>
                   </div>
