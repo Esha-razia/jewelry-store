@@ -158,21 +158,24 @@ const CategoryProducts = () => {
             </button>
           </div>
 
-          {/* Togglable Filter Drawer */}
+          {/* Togglable Filter Radio Menu (Matching User Screenshot) */}
           {filtersOpen && (
-            <div className="glass-panel category-filter-bar fade-in" style={{ padding: '0.75rem 1.5rem', marginBottom: '2rem', display: 'flex', justifyContent: 'flex-end' }}>
-              {/* Sort Filter */}
-              <select 
-                value={sortBy} 
-                onChange={(e) => setSortBy(e.target.value)}
-                style={{ padding: '0.6rem 1.8rem 0.6rem 1rem', borderRadius: '8px', fontSize: '0.85rem', cursor: 'pointer', background: '#141414', color: '#fff', border: '1px solid var(--border-subtle)', minWidth: '220px' }}
-              >
-                <option value="featured">Featured Sort</option>
-                <option value="price-low-high">Price: Low to High</option>
-                <option value="price-high-low">Price: High to Low</option>
-                <option value="name-a-z">Name: A to Z</option>
-                <option value="name-z-a">Name: Z to A</option>
-              </select>
+            <div className="filter-radio-menu fade-in">
+              {[
+                { label: 'Price: Low to High', value: 'price-low-high' },
+                { label: 'Price: High to Low', value: 'price-high-low' },
+                { label: 'Name: A to Z', value: 'name-a-z' },
+                { label: 'Name: Z to A', value: 'name-z-a' }
+              ].map((opt) => (
+                <div 
+                  key={opt.value} 
+                  className={`filter-radio-item ${sortBy === opt.value ? 'selected' : ''}`}
+                  onClick={() => setSortBy(sortBy === opt.value ? 'featured' : opt.value)}
+                >
+                  <span>{opt.label}</span>
+                  <div className={`radio-circle ${sortBy === opt.value ? 'active' : ''}`} />
+                </div>
+              ))}
             </div>
           )}
 

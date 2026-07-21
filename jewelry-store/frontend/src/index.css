@@ -1706,7 +1706,7 @@ th {
 }
 
 .product-card-image-wrapper {
-  height: 220px;
+  height: 170px;
   width: 100%;
   flex-shrink: 0;
   overflow: hidden;
@@ -1724,35 +1724,35 @@ th {
 }
 
 .product-card-info-wrapper {
-  padding: 1.25rem;
+  padding: 0.9rem 1rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.5rem;
   background: rgba(255, 255, 255, 0.01);
 }
 
 .product-card-meta h3 {
-  font-size: 1.15rem;
-  margin: 0 0 0.35rem 0;
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem 0;
   font-family: var(--font-sans);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.35;
   color: var(--text-main);
 }
 
 .product-card-material {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   margin: 0;
 }
 
 .product-card-desc {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  margin: 0.5rem 0 0 0;
-  line-height: 1.5;
+  margin: 0.4rem 0 0 0;
+  line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1761,24 +1761,24 @@ th {
 
 .product-card-price {
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--accent-gold);
 }
 
 /* 1 Column Layout Updates (landscape row on desktop) */
 .product-grid-layout.cols-1 .product-card-link {
   flex-direction: row;
-  height: 180px;
+  height: 160px;
   align-items: stretch;
 }
 
 .product-grid-layout.cols-1 .product-card-image-wrapper {
-  width: 240px;
+  width: 220px;
   height: 100%;
 }
 
 .product-grid-layout.cols-1 .product-card-info-wrapper {
-  padding: 1.25rem 2rem;
+  padding: 1rem 1.75rem;
   justify-content: center;
   gap: 0.35rem;
 }
@@ -1792,13 +1792,75 @@ th {
   }
   .product-grid-layout.cols-1 .product-card-image-wrapper {
     width: 100%;
-    height: 200px;
+    height: 160px;
   }
   .product-grid-layout.cols-1 .product-card-info-wrapper {
     justify-content: space-between;
-    padding: 1.25rem;
-    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    gap: 0.5rem;
   }
+}
+
+/* --- Filter Radio Menu (Matching User Screenshot) --- */
+.filter-radio-menu {
+  background: rgba(20, 20, 20, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+}
+
+.filter-radio-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--text-main);
+  transition: background 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.filter-radio-item:last-child {
+  border-bottom: none;
+}
+
+.filter-radio-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.filter-radio-item.selected {
+  color: var(--accent-gold);
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.radio-circle.active {
+  border-color: var(--accent-gold);
+}
+
+.radio-circle.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-gold);
 }
 
 .grid-switch-btn {
