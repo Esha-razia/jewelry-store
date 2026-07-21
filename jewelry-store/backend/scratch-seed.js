@@ -27,7 +27,7 @@ const seedAllCategories = async () => {
       {
         name: 'Diamond Solitaire Ring',
         image: '/images/rings_1.jpg',
-        description: 'Round brilliant diamond solitaire in a classic four-prong setting.',
+        description: 'This breathtaking Diamond Solitaire Ring features a round brilliant-cut diamond held aloft in a classic four-prong basket setting crafted in radiant 18k white gold. The precision-cut stone is hand-selected for its exceptional clarity and fire, catching light from every angle with mesmerising scintillation. The slender, polished band tapers gracefully toward the center stone, enhancing its visual presence while providing an elegant and comfortable fit throughout the day. Perfect as an engagement ring or a timeless milestone gift, this piece is designed to be cherished for a lifetime. Store in the provided velvet pouch and clean with warm soapy water to maintain its brilliant, enduring sparkle.',
         brand: 'Aurora Custom',
         category: 'Rings',
         price: 2499,
@@ -41,7 +41,7 @@ const seedAllCategories = async () => {
       {
         name: 'Gold Diamond Ring',
         image: '/images/rings_2.jpg',
-        description: 'Yellow gold band with a bright center diamond and polished shoulders.',
+        description: 'The Gold Diamond Ring is a masterpiece of classical fine jewellery, showcasing a vivid round-cut diamond nestled atop a lustrous 18k yellow gold band with beautifully polished shoulders. The warm honey tones of the gold complement the diamond\'s icy brilliance, creating a striking contrast that draws the eye with every movement of the hand. Each facet of the stone is expertly aligned to maximise light return, delivering a scintillating display in both natural and artificial lighting. The smooth interior of the band ensures all-day comfort, making this ring ideal for both everyday luxury and formal occasions. A timeless investment piece that only gains sentimental value as the years go by.',
         brand: 'Aurora Classic',
         category: 'Rings',
         price: 1899,
@@ -55,7 +55,7 @@ const seedAllCategories = async () => {
       {
         name: 'Stainless Steel Band Ring',
         image: '/images/rings_3.jpg',
-        description: 'Sleek silver-tone band with a single clear stone — durable daily wear.',
+        description: 'The Stainless Steel Band Ring combines contemporary minimalism with exceptional durability, making it the perfect companion for an active, stylish lifestyle. The smooth, high-polish band is crafted from premium medical-grade stainless steel, which resists tarnish, scratching, and everyday wear with remarkable ease. A single, bright cubic zirconia stone sits flush in the band, catching light subtly for a clean and understated elegance that suits any occasion. Its unisex silhouette transitions effortlessly from casual daywear to smart evening looks without missing a beat. Low-maintenance and hypoallergenic, this ring is the ideal choice for those who love fuss-free, modern jewellery that looks great day after day.',
         brand: 'Aurora Modern',
         category: 'Rings',
         price: 89,
@@ -69,7 +69,7 @@ const seedAllCategories = async () => {
       {
         name: 'Rose Gold Wedding Band',
         image: '/images/rings_4.jpg',
-        description: 'Smooth rose gold wedding band with a comfort-fit interior.',
+        description: 'This Rose Gold Wedding Band is a symbol of enduring love, crafted in warm 14k rose gold with a smooth, satin exterior that glows with a deeply romantic blush hue. The comfort-fit interior is expertly rounded to allow the band to glide on and off with ease, ensuring all-day wearing comfort even for those who are new to rings. Its understated, non-fussy design pairs beautifully with virtually any engagement ring or can be worn solo as a statement of quiet, confident elegance. The rose gold alloy is selected for its superior colour stability, maintaining its signature blush tone beautifully for decades of daily wear. A truly eternal piece, ideal for wedding ceremonies, anniversaries, or simply as a daily reminder of a cherished and precious bond.',
         brand: 'Aurora Minimal',
         category: 'Rings',
         price: 420,
@@ -83,7 +83,7 @@ const seedAllCategories = async () => {
       {
         name: 'Oval Cut Gemstone Ring',
         image: '/images/rings_5.jpg',
-        description: 'Oval center stone in a slim bezel — modern east-west silhouette.',
+        description: 'The Oval Cut Gemstone Ring redefines modern elegance with its distinctive east-west orientation, positioning the elongated oval gemstone horizontally across the finger for a bold and fashion-forward look. Set in a slim, low-profile bezel of 14k gold, the stone is securely embraced while remaining the undisputed focal point of the design. The vivid colour of the oval gemstone creates a captivating contrast against the warm gold setting, making this piece a true conversation starter at any gathering or event. Its slender band and minimalist aesthetic make it a versatile companion for both stacked ring looks and elegant solo wear. This ring embodies the spirit of the modern jewellery lover — confident, artistic, and refreshingly original in every detail.',
         brand: 'Aurora Modern',
         category: 'Rings',
         price: 760,
@@ -97,7 +97,7 @@ const seedAllCategories = async () => {
       {
         name: 'Halo Diamond Engagement Ring',
         image: '/images/rings_6.jpg',
-        description: 'Center diamond surrounded by a micro-pavé halo on a tapered shank.',
+        description: 'The Halo Diamond Engagement Ring is the pinnacle of romance and refined craftsmanship, featuring a brilliant round-cut centre diamond encircled by a shimmering micro-pavé halo of hand-set accent diamonds. Crafted in solid platinum for unmatched durability and a naturally white brilliance that never fades, the ring\'s tapered shank creates an elegant and slender silhouette on the finger. The halo design amplifies the apparent size of the centre stone while adding extraordinary depth and sparkle from every angle imaginable. Each diamond is individually inspected and set by our master jewellers, ensuring impeccable alignment and maximum brilliance across the entire piece. A breathtaking declaration of love, presented in a luxury box with a full certificate of authenticity.',
         brand: 'Aurora Royal',
         category: 'Rings',
         price: 3100,
@@ -113,7 +113,7 @@ const seedAllCategories = async () => {
       {
         name: 'Pearl Strand Necklace',
         image: '/images/pearl_necklace.png',
-        description: 'Classic graduated pearl strand with a secure fishhook clasp.',
+        description: 'The Pearl Strand Necklace is a timeless heirloom-quality piece featuring a classic graduated strand of lustrous freshwater pearls, each selected for its exceptional roundness, surface quality, and satiny, luminous glow. The pearls are individually knotted on a silk thread — a traditional technique that both protects each pearl and ensures the strand drapes with graceful fluidity against the décolletage. A secure and elegant fishhook clasp in sterling silver completes the design, allowing for easy fastening while maintaining the clean and refined aesthetic of the piece. Ranging from 16 to 18 inches in length, this necklace sits beautifully at the collarbone and is equally suitable for bridal, formal, and sophisticated everyday wear. Store flat in the provided silk pouch to preserve the thread and protect the pearl\'s natural nacre over time.',
         brand: 'Aurora Classic',
         category: 'Necklaces',
         price: 1550,
@@ -127,7 +127,7 @@ const seedAllCategories = async () => {
       {
         name: '18k Gold Chain Necklace',
         image: '/images/gold_necklace.png',
-        description: 'Heavy curb-link chain in high-polish yellow gold.',
+        description: 'The 18k Gold Chain Necklace is a bold statement in pure luxury, crafted from a substantial heavy curb-link chain in brilliant high-polish 18k yellow gold that radiates warmth and prestige with every wear. Each flat, interlocking link is meticulously crafted and polished to a mirror finish, reflecting light in a rich, continuous cascade along the neck. The substantial weight of the chain gives it a commanding presence that transitions beautifully from daywear to evening occasions, lending an air of effortless affluence to any look. Fitted with a secure lobster clasp, it can be worn as a standalone statement piece or layered with pendants and shorter chains for a personalised, curated aesthetic. This is a true investment piece in fine jewellery that will only grow in value over the years.',
         brand: 'Aurora Classic',
         category: 'Necklaces',
         price: 899,
@@ -141,7 +141,7 @@ const seedAllCategories = async () => {
       {
         name: 'Sapphire Pendant Necklace',
         image: '/images/sapphire_pendant.png',
-        description: 'Brilliant blue sapphire surrounded by diamonds on a fine gold chain.',
+        description: 'The Sapphire Pendant Necklace is an exquisite celebration of colour and light, centred on a deeply saturated royal blue sapphire of exceptional quality, encircled by a delicate halo of sparkling white diamonds in a fine gold setting. The vivid blue of the sapphire — historically associated with royalty and divine wisdom — creates a stunning contrast against the warm gold, making this pendant a truly eye-catching statement piece for any occasion. Suspended on a fine gold chain, the pendant rests elegantly at the décolletage, drawing attention with its radiant combination of rich colour and brilliant light. The secure bail and clasp ensure the pendant sits perfectly centred and remains safely in place throughout the entirety of the day. A deeply meaningful gift for birthdays, anniversaries, or significant milestones, presented in a signature JEWELSAFA gift box.',
         brand: 'Aurora Royal',
         category: 'Necklaces',
         price: 1650,
@@ -155,7 +155,7 @@ const seedAllCategories = async () => {
       {
         name: 'Diamond Pendant Necklace',
         image: '/images/necklaces_4.jpg',
-        description: 'Solitaire diamond on a fine cable chain with adjustable extender.',
+        description: 'The Diamond Pendant Necklace distils fine jewellery to its most perfect, pure form: a single brilliant-cut diamond suspended on an impossibly fine white gold cable chain for a look of understated and timeless elegance. The solitaire diamond is bezel-set in a smooth, minimal mount that allows light to enter from all directions, maximising the stone\'s natural fire and sparkle against the skin. An adjustable extender at the clasp allows the necklace to be worn at multiple lengths — from a delicate 16-inch collarbone length to a slightly longer 18-inch drop — making it versatile for any neckline and outfit. The simplicity of this design makes it an impeccable everyday luxury piece as well as a refined addition to any formal evening look. Ideal as a gift for someone who appreciates the refined, less-is-more philosophy of truly great jewellery.',
         brand: 'Aurora Custom',
         category: 'Necklaces',
         price: 1280,
@@ -169,7 +169,7 @@ const seedAllCategories = async () => {
       {
         name: 'Layered Gold Necklace',
         image: '/images/necklaces_5.jpg',
-        description: 'Two-length layered chains with delicate disc charms.',
+        description: 'The Layered Gold Necklace captures the effortless, sun-kissed aesthetic of modern boho-luxury style, featuring two delicate chain strands of slightly different lengths designed to drape beautifully together in a perfectly coordinated layered look. Each chain is adorned with minimalist disc charms in a brushed and polished 14k gold-plated finish that catches the light with a warm, subtle gleam from every angle. The dual-chain design is cleverly joined at a single clasp, eliminating the tangling and constant adjusting that often comes with wearing separate layered necklaces throughout the day. Perfect for pairing with low V-necklines, off-shoulder tops, or your favourite summer dress, this necklace adds a touch of curated elegance to any casual or semi-formal ensemble. A thoughtful gift for the jewellery lover who appreciates both stylish beauty and everyday practicality.',
         brand: 'Aurora Modern',
         category: 'Necklaces',
         price: 340,
@@ -183,7 +183,7 @@ const seedAllCategories = async () => {
       {
         name: 'Silver Rope Chain Necklace',
         image: '/images/necklaces_6.jpg',
-        description: 'Twisted rope chain in bright sterling silver — unisex length.',
+        description: 'The Silver Rope Chain Necklace is a versatile, unisex statement piece crafted from tightly interwoven sterling silver links that form a beautifully textured rope pattern along its entire length. The bright, high-polish finish of the 925 sterling silver catches light beautifully, giving the chain a dynamic and eye-catching shimmer that moves and changes as you do. Its robust yet elegant construction makes it sturdy enough for daily wear while remaining visually refined, whether worn solo or layered with other chains and pendants for a more editorial look. The unisex design and versatile 22-inch length means it looks equally striking on any neckline, from open collars to sportswear to formal evening dress. Sterling silver is naturally hypoallergenic and can be easily polished with a soft cloth at home to restore its full, brilliant shine.',
         brand: 'Aurora Modern',
         category: 'Necklaces',
         price: 120,
@@ -199,7 +199,7 @@ const seedAllCategories = async () => {
       {
         name: 'Diamond Tennis Bracelet',
         image: '/images/platinum_bracelet.png',
-        description: 'Continuous line of round diamonds with a box safety clasp.',
+        description: 'The Diamond Tennis Bracelet is the ultimate symbol of elegance and timeless luxury, featuring an unbroken line of perfectly matched round brilliant diamonds individually set in a seamless platinum mounting that wraps the wrist in pure, breathtaking brilliance. Every diamond is hand-selected by our gemologists for uniformity of colour, clarity, and cut, ensuring the bracelet sparkles with a consistent, radiant fire from every angle and in every light condition. The patented box-and-safety clasp provides an exceptionally secure fastening, so you can wear this precious piece with complete confidence throughout even the most active of days. The beautifully low-profile silhouette allows it to be stacked elegantly with other bracelets or worn alone as the definitive statement of refined, sophisticated taste. An heirloom-quality treasure, presented with a certificate of diamond authenticity and a platinum polishing cloth.',
         brand: 'Aurora Royal',
         category: 'Bracelets',
         price: 3499,
@@ -213,7 +213,7 @@ const seedAllCategories = async () => {
       {
         name: 'Gold Link Chain Bracelet',
         image: '/images/bracelets_1.jpg',
-        description: 'Interlocking gold links with a lobster clasp — classic men’s or women’s style.',
+        description: 'The Gold Link Chain Bracelet is a quintessentially classic piece of fine jewellery, crafted from smooth interlocking 18k yellow gold links that create a beautifully fluid and tactile drape around the wrist. The substantial weight and satisfying texture of the links speak to the highest quality of craftsmanship, with each link individually polished to a mirror-bright finish that radiates warmth and prestige. A secure lobster claw clasp completes the bracelet, making it easy to fasten single-handedly while keeping the overall design clean and completely uninterrupted. Its versatile, genderless silhouette makes it a beloved style for both men and women, worn equally well with a tailored suit or a casual weekend outfit. A true wardrobe staple in 18k gold that will be admired and treasured across generations.',
         brand: 'Aurora Classic',
         category: 'Bracelets',
         price: 680,
@@ -227,7 +227,7 @@ const seedAllCategories = async () => {
       {
         name: 'Pearl Line Bracelet',
         image: '/images/bracelets_2.jpg',
-        description: 'Uniform freshwater pearls strung on silk with a gold clasp.',
+        description: 'The Pearl Line Bracelet is a graceful and feminine piece of fine jewellery, featuring a seamless row of perfectly matched, high-lustre freshwater pearls selected for their uniform size and exceptional surface quality that glows with a creamy, satiny radiance. Each pearl is individually knotted on the finest natural silk thread — a time-honoured technique that both prevents the pearls from rubbing together and gives the bracelet a fluid, supple drape around the wrist. The strand is finished with an elegant 14k gold lobster clasp that adds a precious warmth to the natural ivory and cream tones of the pearls. This bracelet is a beautiful complement to the Pearl Strand Necklace and Pearl Drop Earrings for a full coordinated set, or a stunning standalone piece for everyday sophisticated wear. Pearls are best stored away from perfume and cosmetics to preserve their natural luminous nacre for years to come.',
         brand: 'Aurora Classic',
         category: 'Bracelets',
         price: 520,
@@ -241,7 +241,7 @@ const seedAllCategories = async () => {
       {
         name: 'Silver Cuff Bracelet',
         image: '/images/bracelets_3.jpg',
-        description: 'Open cuff in brushed sterling with rounded edges.',
+        description: 'The Silver Cuff Bracelet is a bold yet understated wrist statement, hand-formed from a single piece of premium 925 sterling silver into a perfectly proportioned open-cuff silhouette with elegantly rounded edges that are gentle and comfortable against the skin all day. The brushed matte finish gives the piece a contemporary, sculptural quality — sophisticated without being overly ornate — that pairs effortlessly with everything from denim and cashmere to formal evening attire. The open design allows for a flexible, universal fit that adjusts gently to the wearer\'s wrist without the need for clasps or additional hardware. Its clean, minimal lines make it an ideal canvas for stacking with other bracelets of varying textures and metals for a curated, eclectic arm look. A versatile modern heirloom that only grows more beautiful with the natural patina it develops gracefully over time.',
         brand: 'Aurora Modern',
         category: 'Bracelets',
         price: 145,
@@ -255,7 +255,7 @@ const seedAllCategories = async () => {
       {
         name: 'Rose Gold Charm Bracelet',
         image: '/images/bracelets_4.jpg',
-        description: 'Cable chain with heart and star charms in rose gold finish.',
+        description: 'The Rose Gold Charm Bracelet is a delightfully whimsical and personal piece of jewellery, crafted on a dainty cable chain in a warm rose gold finish and adorned with a curated collection of miniature heart and star charms that dance and catch the light with every movement of the wrist. Each charm is individually attached to the chain and crafted with a fine level of detail — smooth, tactile surfaces that hold their colour beautifully thanks to the durable rose gold plating. The bracelet is designed to grow with you over time; additional charms can be added to make it a truly personal and evolving keepsake that tells your unique story in precious miniature form. A secure lobster clasp ensures it stays safely and comfortably on the wrist throughout the day, from morning commutes to evening celebrations. An ideal gift for milestone birthdays, graduations, or anyone who loves a touch of romantic charm in their everyday accessories.',
         brand: 'Aurora Minimal',
         category: 'Bracelets',
         price: 210,
@@ -269,7 +269,7 @@ const seedAllCategories = async () => {
       {
         name: 'Leather & Gold Bead Bracelet',
         image: '/images/bracelets_6.jpg',
-        description: 'Braided leather wrap with gold-tone magnetic clasp and accent beads.',
+        description: 'The Leather and Gold Bead Bracelet is a sophisticated fusion of natural and metallic elements, featuring a rich, hand-braided genuine leather cord that wraps around the wrist for a relaxed, artisan aesthetic beautifully combined with the luxurious gleam of gold-tone accent beads. The smooth, round gold beads are spaced at regular intervals along the leather braid, creating a striking rhythm of texture and shine that elevates this piece well beyond a mere casual accessory. A sleek magnetic clasp in a matching gold tone fastens the bracelet securely without sacrificing the clean, streamlined look of the overall design. Ideal for the man or woman who seeks jewellery that bridges the gap between rugged and refined, this bracelet layers beautifully with watches and other bracelets for a textured, layered wrist aesthetic. Easy to care for: simply wipe the leather with a damp cloth and buff the beads with a jewellery polishing cloth when needed.',
         brand: 'Aurora Modern',
         category: 'Bracelets',
         price: 75,
@@ -285,7 +285,7 @@ const seedAllCategories = async () => {
       {
         name: 'Diamond Stud Earrings',
         image: '/images/earrings_1.jpg',
-        description: 'Matched pair of round brilliant studs in four-prong baskets.',
+        description: 'The Diamond Stud Earrings are a foundational piece of any fine jewellery wardrobe, featuring a perfectly matched pair of round brilliant-cut diamonds set in classic four-prong basket settings crafted in radiant 18k white gold. Each diamond is hand-selected for its superior cut grade, ensuring that both stones exhibit identical levels of fire, brilliance, and scintillation for a beautifully balanced and symmetrical pair. The sturdy yet elegant post-and-butterfly backing keeps the earrings securely in place throughout the day, making them suitable for continuous wear without any discomfort. Their timeless simplicity means they complement virtually every face shape, hairstyle, and outfit — from a relaxed daytime look to a full formal evening gown. Presented in a luxurious JEWELSAFA velvet pouch with a gemstone grading report for complete peace of mind.',
         brand: 'Aurora Custom',
         category: 'Earrings',
         price: 1899,
@@ -299,7 +299,7 @@ const seedAllCategories = async () => {
       {
         name: 'Gold Hoop Earrings',
         image: '/images/earrings_2.jpg',
-        description: 'Medium tubular hoops with secure click-back posts.',
+        description: 'The Gold Hoop Earrings are a perennially chic and endlessly wearable jewellery staple, crafted as perfectly round medium-sized hoops in solid 18k yellow gold with a polished, tubular cross-section that radiates a warm and rich golden light. The smooth, seamless form of each hoop is a testament to precise craftsmanship — no seams, no imperfections, just a flawlessly continuous circle of pure gold that glows magnificently in every light. A secure click-back post mechanism makes them easy to put on and take off while ensuring they remain safely in place throughout even the most active and social of days. Their medium diameter hits the sweet spot for everyday elegance: larger than a delicate huggie but more understated than an oversized statement hoop, making them suitable for the office, a dinner date, or a weekend outing. An investment in classic style that will carry you through every chapter of your life with enduring, polished grace.',
         brand: 'Aurora Classic',
         category: 'Earrings',
         price: 480,
@@ -313,7 +313,7 @@ const seedAllCategories = async () => {
       {
         name: 'Pearl Drop Earrings',
         image: '/images/earrings_3.jpg',
-        description: 'Akoya pearls on gold posts with leaf-motif caps.',
+        description: 'The Pearl Drop Earrings are a refined and romantically feminine jewellery statement, featuring lustrous Akoya pearls — prized for their intensely brilliant, mirror-like surface quality — suspended gracefully below delicate 14k gold stud posts. Each pearl is capped by a beautifully detailed leaf-motif setting in gold that adds a botanical elegance to the design, bridging the natural beauty of the pearl with the crafted artistry of fine metalwork. The gentle drop length creates a subtle movement as the wearer turns their head, catching light and drawing attention to the graceful curve of the neck and jaw line. These earrings are equally suited to formal occasions — weddings, galas, and graduations — as they are to an elevated everyday look paired with a silk blouse or summer dress. Pearl earrings are best stored in the provided soft pouch, kept away from cosmetics and perfume, to preserve their luminous surface for years to come.',
         brand: 'Aurora Classic',
         category: 'Earrings',
         price: 920,
@@ -327,7 +327,7 @@ const seedAllCategories = async () => {
       {
         name: 'Silver Ball Stud Earrings',
         image: '/images/earrings_4.jpg',
-        description: 'Polished sterling ball studs — everyday minimal pair.',
+        description: 'The Silver Ball Stud Earrings are the quintessential minimalist jewellery essential: a perfectly smooth, high-polished sterling silver sphere on a fine silver post that sits crisply against the earlobe for a look of clean, effortless sophistication. Crafted in 925 sterling silver, each ball is burnished to a brilliant mirror finish that reflects light with a bright, unfussy sparkle that naturally elevates even the most casual of outfits. The compact, streamlined silhouette makes them appropriate for every setting — school, work, the gym, a formal dinner — making them the most versatile earrings in any jewellery collection. The secure butterfly backing keeps the earrings comfortably in place all day, and their lightweight construction means you\'ll often forget you are even wearing them. Hypoallergenic and nickel-free, these studs are the safe and stylish choice for even the most sensitive ears, making them a perfect everyday companion.',
         brand: 'Aurora Minimal',
         category: 'Earrings',
         price: 45,
@@ -341,7 +341,7 @@ const seedAllCategories = async () => {
       {
         name: 'Emerald Stud Earrings',
         image: '/images/earrings_5.jpg',
-        description: 'Square emeralds in bezel settings with diamond halos.',
+        description: 'The Emerald Stud Earrings are a bold and luxurious celebration of colour, each featuring a richly hued square-cut emerald of exceptional quality bezel-set in fine gold and encircled by a glittering pavé halo of brilliant white diamonds. The vivid green of the emeralds — a colour long associated with royalty, vitality, and natural splendour — is magnificently amplified by the surrounding diamond halos, which frame the stones and draw the eye to their extraordinary depth of colour. The bezel setting provides an additional layer of protection for the precious emerald, making these earrings both practical for elevated everyday wear and spectacular for the grandest formal occasions. Crafted to the highest standard of fine jewellery, each pair is carefully inspected to ensure perfect colour-matching and symmetrical halo placement throughout. Presented in a signature JEWELSAFA gift box with a gemstone quality report included for your peace of mind.',
         brand: 'Aurora Royal',
         category: 'Earrings',
         price: 1650,
@@ -355,7 +355,7 @@ const seedAllCategories = async () => {
       {
         name: 'Crystal Drop Earrings',
         image: '/images/earrings_6.jpg',
-        description: 'Elongated crystal drops on rhodium hooks for evening wear.',
+        description: 'The Crystal Drop Earrings are a glamorous and theatrical choice for any special occasion, featuring elongated faceted crystal pendants that fall gracefully from sleek rhodium-plated hooks, catching and refracting light with spectacular and chandelier-like brilliance. The high-clarity crystals are precision-cut to maximise their optical properties, delivering a dazzling display of prismatic, rainbow-coloured light with every movement that makes these earrings truly come alive under event lighting and candlelight. The slender, elongated drop silhouette creates an elegantly elongating effect on the neck and jaw, making them a universally flattering choice for a wide variety of face shapes and personal styles. Rhodium plating provides a brilliant, tarnish-resistant finish that maintains its mirror-like quality throughout the entire evening and beyond. Ideal for galas, black-tie events, weddings, or any moment when you wish to make a truly unforgettable and lasting impression.',
         brand: 'Aurora Royal',
         category: 'Earrings',
         price: 280,
@@ -371,7 +371,7 @@ const seedAllCategories = async () => {
       {
         name: 'Traditional Gold Bangles (Pair)',
         image: '/images/bangles_1.jpg',
-        description: 'Classic hand-forged gold kangans with traditional engraving — worn as a pair.',
+        description: 'The Traditional Gold Bangles are a magnificent expression of South Asian jewellery heritage, hand-forged by skilled artisans from 22k gold to produce a pair of weighty, luminous kangans that carry the warmth and gravitas of pure gold in every gram. The surface of each bangle is adorned with intricate traditional engraving — geometric and floral motifs drawn from centuries of subcontinental goldsmithing tradition — that give the pieces an irreplaceable depth of cultural character and richness. As a pair, the bangles are worn together on one wrist, where their gentle clinking creates the timelessly evocative sound associated with South Asian bridal and festive jewellery. Their rigid, circular profile is crafted to a standard inner diameter suitable for most adult wrists, with a slightly tapered edge to facilitate easy and comfortable wearing. An exceptional bridal jewellery investment and family heirloom meant to be passed from generation to generation as a symbol of wealth, tradition, and celebration.',
         brand: 'Aurora Heritage',
         category: 'Bangles',
         price: 3800,
@@ -385,7 +385,7 @@ const seedAllCategories = async () => {
       {
         name: 'Colorful Glass Bangles Set',
         image: '/images/bangles_2.jpg',
-        description: 'Set of bright glass churis in red, green, and gold tones for festive wear.',
+        description: 'The Colorful Glass Bangles Set is a joyful and vibrant celebration of festive South Asian jewellery tradition, featuring a generous set of hand-crafted glass churis in a lively palette of rich red, emerald green, and gleaming gold tones that capture the spirit of celebration with every wear. Each bangle is crafted from high-quality coloured glass with a smooth, uniform finish and a subtle translucency that allows light to pass through, creating a beautiful and glowing effect in both natural and artificial light. Worn stacked in multiples on one or both wrists, these bangles create the iconic, musical sound of traditional churis that has been a beloved part of South Asian festive and bridal culture for many generations. The set is designed to complement traditional wear — salwar suits, lehengas, and saris — as well as being a delightful colourful accent on casual or fusion outfits. A colourful and affordable gift for Eid, Diwali, weddings, or any occasion that calls for joyful adornment and festive spirit.',
         brand: 'Aurora Heritage',
         category: 'Bangles',
         price: 45,
@@ -399,7 +399,7 @@ const seedAllCategories = async () => {
       {
         name: 'Red & Gold Bridal Bangles',
         image: '/images/bangles_3.jpg',
-        description: 'Wide lac bangles in bridal red with gold dot work — South Asian wedding style.',
+        description: 'The Red and Gold Bridal Bangles are a breathtaking centrepiece of South Asian bridal jewellery, crafted from traditional lac — a resinous material with a long history in the subcontinent\'s jewellery arts — in a deep, auspicious bridal red enriched with intricate gold dot work applied by hand in a time-honoured decorative technique. The wide, statement-making profile of each bangle creates a bold visual impact when stacked on the bridal wrists, giving the full, layered look that is central to the South Asian bridal aesthetic and is believed to bring good fortune and blessings to the bride. The vibrant red is a colour of profound cultural significance in Pakistani and Indian wedding traditions, symbolising love, prosperity, and the joyful beginning of a new chapter of life. The gold detailing adds a luxurious contrast that catches the light magnificently in photography and candlelight, ensuring the bridal look is impeccably captured in every photograph. A cherished keepsake of the wedding day and a truly beautiful and meaningful gift for brides-to-be.',
         brand: 'Aurora Heritage',
         category: 'Bangles',
         price: 65,
@@ -413,7 +413,7 @@ const seedAllCategories = async () => {
       {
         name: 'Silver Kada Bangles',
         image: '/images/bangles_4.jpg',
-        description: 'Polished sterling kada bangles with a smooth rigid oval profile.',
+        description: 'The Silver Kada Bangles are a sophisticated and culturally resonant wrist accessory, crafted from solid 925 sterling silver and formed into a smooth, rigid oval profile that sits elegantly on the wrist with a satisfying, weighty presence. The surface of each kada is polished to a mirror-bright finish that radiates a clean, brilliant silver light, making these bangles a striking complement to both traditional South Asian dress and contemporary Western fashion with equal ease and grace. The kada form — a staple of South Asian jewellery across multiple cultural communities — carries deep cultural significance, often worn as a mark of identity, personal faith, and heritage across generations. Their robust, solid construction means these bangles are built to be worn daily and to last a lifetime with minimal maintenance, developing a beautiful and natural patina as the years pass. Keep the silver lustrous by polishing occasionally with a soft silver cloth; they make a meaningful and lasting gift for any cherished occasion.',
         brand: 'Aurora Modern',
         category: 'Bangles',
         price: 180,
@@ -427,7 +427,7 @@ const seedAllCategories = async () => {
       {
         name: 'Rose Gold Plated Bangles',
         image: '/images/bangles_5.jpg',
-        description: 'Slim rose-gold-tone bangles with a soft mirror finish — set of four.',
+        description: 'The Rose Gold Plated Bangles are an irresistibly elegant set of four slim stacking bangles, each crafted from smooth brass and coated in a lustrous rose gold tone plating that delivers a warm, romantic blush hue with the quality feel and appearance of a premium metal. The slim, uniform profile of each bangle makes them perfectly proportioned for stacking — wear all four together for a full, layered statement look, or mix and match one or two with your existing jewellery for a subtler accent of warm colour and texture. The mirror-polished finish on each bangle catches light beautifully, reflecting a warm golden-pink shimmer that is both feminine and thoroughly sophisticated in any setting. They transition effortlessly from day to evening wear, lending a polished and curated quality to both casual outfits and formal attire throughout any occasion. The set is presented in a keepsake box, making it a lovely and generous gift for birthdays, Valentine\'s Day, or any occasion that deserves a touch of rosy luxury.',
         brand: 'Aurora Modern',
         category: 'Bangles',
         price: 95,
@@ -441,7 +441,7 @@ const seedAllCategories = async () => {
       {
         name: 'Green Enamel Kundan Bangles',
         image: '/images/bangles_6.jpg',
-        description: 'Green meenakari enamel with kundan stone inlay — festive traditional kada.',
+        description: 'The Green Enamel Kundan Bangles are a breathtaking work of traditional South Asian jewellery artistry, combining the ancient craft of meenakari — the intricate application of vibrantly coloured enamel to metal — with the equally storied tradition of kundan stone-setting in a single and spectacular festive kada. The deep, jewel-toned green enamel covers the bangle\'s surface in a rich, glossy layer, punctuated by the brilliant sparkle of hand-set kundan stones that catch and reflect the light with an ethereal and crystalline glow. This technique, refined over centuries in the royal ateliers of Rajasthan and the Mughal courts, produces a result that is simultaneously bold and intricate, deeply traditional yet timelessly beautiful in every respect. Ideal for wearing with festive lehengas, bridal ensembles, or any occasion that calls for jewellery of exceptional cultural richness and outstanding visual impact. Handle with care and store wrapped in soft tissue to preserve both the enamel surface and the full brilliance of the kundan stones.',
         brand: 'Aurora Heritage',
         category: 'Bangles',
         price: 220,
