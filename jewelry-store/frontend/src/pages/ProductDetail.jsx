@@ -169,42 +169,57 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* FAQs accordion items */}
-            {faqsToRender.map((faq, index) => {
-              const key = `faq-${index}`;
-              const isOpen = openFaqIndex === key;
-              return (
-                <div key={key} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <button
-                    onClick={() => setOpenFaqIndex(isOpen ? null : key)}
-                    style={{
-                      width: '100%', background: 'none', border: 'none',
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      padding: '1.1rem 0', cursor: 'pointer', color: 'var(--text-main)',
-                      fontFamily: 'var(--font-sans)', fontSize: '1rem', fontWeight: '600',
-                      textAlign: 'left', letterSpacing: '0.02em'
-                    }}
-                  >
-                    <span style={{ color: isOpen ? 'var(--accent-gold)' : 'var(--text-main)', transition: 'color 0.2s', paddingRight: '1rem' }}>
-                      {faq.question}
-                    </span>
-                    <span style={{ color: 'var(--accent-gold)', fontSize: '1.3rem', lineHeight: 1, fontWeight: '300', flexShrink: 0 }}>
-                      {isOpen ? '−' : '+'}
-                    </span>
-                  </button>
-                  <div style={{
-                    maxHeight: isOpen ? '500px' : '0px',
-                    overflow: 'hidden',
-                    transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                    opacity: isOpen ? 1 : 0
-                  }}>
-                    <p className="text-muted" style={{ padding: '0.25rem 0 1.25rem 0', fontSize: '0.95rem', lineHeight: '1.75' }}>
-                      {faq.answer}
-                    </p>
-                  </div>
+            {/* Single Product FAQs accordion — all Q/A inside */}
+            <div style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+              <button
+                onClick={() => setOpenFaqIndex(openFaqIndex === 'faqs' ? null : 'faqs')}
+                style={{
+                  width: '100%', background: 'none', border: 'none',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '1.1rem 0', cursor: 'pointer', color: 'var(--text-main)',
+                  fontFamily: 'var(--font-sans)', fontSize: '1rem', fontWeight: '600',
+                  letterSpacing: '0.02em'
+                }}
+              >
+                <span style={{ color: openFaqIndex === 'faqs' ? 'var(--accent-gold)' : 'var(--text-main)', transition: 'color 0.2s' }}>
+                  Product FAQs
+                </span>
+                <span style={{ color: 'var(--accent-gold)', fontSize: '1.3rem', lineHeight: 1, fontWeight: '300', flexShrink: 0 }}>
+                  {openFaqIndex === 'faqs' ? '∧' : '+'}
+                </span>
+              </button>
+
+              <div style={{
+                maxHeight: openFaqIndex === 'faqs' ? '2000px' : '0px',
+                overflow: 'hidden',
+                transition: 'max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                opacity: openFaqIndex === 'faqs' ? 1 : 0
+              }}>
+                <div style={{ paddingBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.4rem', paddingTop: '0.5rem' }}>
+                  {faqsToRender.map((faq, index) => (
+                    <div key={index}>
+                      <p style={{
+                        fontWeight: '700',
+                        fontSize: '0.95rem',
+                        color: 'var(--text-main)',
+                        marginBottom: '0.4rem',
+                        lineHeight: '1.5'
+                      }}>
+                        Q: {faq.question}
+                      </p>
+                      <p style={{
+                        fontSize: '0.92rem',
+                        color: 'var(--text-muted)',
+                        lineHeight: '1.75',
+                        margin: 0
+                      }}>
+                        A: {faq.answer}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            </div>
           </div>
 
         </div>
